@@ -3,25 +3,34 @@
     "Name": "1. Foundation of Behavioral Skills",
     "title": "Foundation of Behavioral Skills",
     "img": "https://bharatgrouponline.com/wp-content/uploads/2021/03/1487411501-Human-behaviour-says-it-all.jpg",
-    "href": "https://bafbkbnc.wordpress.com/2025/02/27/fybaf-foundation-of-behavioral-skills/"
+    "href": "https://bafbkbnc.wordpress.com/2025/02/27/fybaf-foundation-of-behavioral-skills/",
+    "visible": "true"
   },
   {
     "Name": "2. Vocational Skills in AC and Fin IV",
     "title": "Vocational Skills in AC and Fin IV",
     "img": "https://knowledge.carolina.com/wp-content/uploads/2021/08/graph_3068300.jpg",
     "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/"
+    "visible": "true"
   },
   {
     "Name": "3. Vocational Skills in AC and Fin III",
-    "no": 3
+     "title": "Vocational Skills in AC and Fin IV",
+    "img": "https://knowledge.carolina.com/wp-content/uploads/2021/08/graph_3068300.jpg",
+    "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/"
+    "visible": "false"
   },
   {
     "Name": "4. Social Media Marketing",
-    "no": 4
+    "img": "https://knowledge.carolina.com/wp-content/uploads/2021/08/graph_3068300.jpg",
+    "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/"
+    "visible": "false"
   },
   {
     "Name": "5. FY-BAF SEM II",
-    "no": 5
+   "img": "https://knowledge.carolina.com/wp-content/uploads/2021/08/graph_3068300.jpg",
+    "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/"
+    "visible": "false"
   },
   {
     "Name": "No Recent Updates",
