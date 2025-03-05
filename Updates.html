@@ -1,1 +1,79 @@
-<h2>No Rent Updates</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Announcements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2d;
+            color: #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        .announcement-box {
+            background-color: #2a2a3d;
+            padding: 15px;
+            margin: 10px auto;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .announcement-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4da6ff;
+        }
+        .announcement-date {
+            font-size: 14px;
+            color: #aaa;
+        }
+        .announcement-content {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .loading {
+            color: #aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Recent Announcements</h2>
+    <div id="announcements">
+        <p class="loading">Loading announcements...</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mock announcements data (replace with API call if needed)
+            let announcements = [
+                { title: "Exam Schedule Released", date: "March 5, 2025", content: "Final exam dates have been updated. Check the portal for details." },
+                { title: "Holiday Notice", date: "March 3, 2025", content: "The college will remain closed on March 8 due to a public holiday." },
+                { title: "New Course Enrollment", date: "March 1, 2025", content: "Enrollments for the upcoming semester are now open." }
+            ];
+
+            let announcementsDiv = document.getElementById("announcements");
+            announcementsDiv.innerHTML = ""; // Clear loading text
+
+            if (announcements.length === 0) {
+                announcementsDiv.innerHTML = "<p>No recent updates</p>";
+            } else {
+                announcements.forEach(announcement => {
+                    let announcementHTML = `
+                        <div class="announcement-box">
+                            <div class="announcement-title">${announcement.title}</div>
+                            <div class="announcement-date">${announcement.date}</div>
+                            <div class="announcement-content">${announcement.content}</div>
+                        </div>
+                    `;
+                    announcementsDiv.innerHTML += announcementHTML;
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
