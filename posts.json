@@ -40,10 +40,28 @@
   },
   {
     "Name": "",
-    "no": 7
-  },
-  {
-    "Name": "",
     "no": 8
+  },
+   {
+    "Name": "",
+    "no": 9
+  },
+   {
+    "Name": "",
+    "no": 10
+  },
+   {
+    "Name": "Notes 1",
+    "title": "FA",
+    "img": "https://i.ibb.co/SwLtQ6Sr/accounts.png",
+    "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/",
+    "visible": "false"
+  },
+   {
+   "Name": "Notes 2",
+    "title": "Behavioral Skills",
+   "img": "https://i.ibb.co/SwLtQ6Sr/accounts.png",
+    "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/",
+    "visible": "false"
   }
 ]
