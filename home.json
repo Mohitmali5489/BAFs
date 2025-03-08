@@ -1,7 +1,7 @@
 [
     {
         "Name": "Event Bar",
-        "visible": "true"
+        "visible": "false"
     },
     {
         "Name": "Assignments",
@@ -9,7 +9,7 @@
     },
     {
         "Name": "Notes",
-        "visible": "true"
+        "visible": "false"
     },
     {
         "Name": "Updates",
