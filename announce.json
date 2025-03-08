@@ -1,19 +1,17 @@
 [
     {
-        "Title": "Event Bar",
-        "date": "false"
-        "body": "false"
+        "Title": "BSE Session",
+        "date": "March 3, 2025",
+        "body": "Final session on Bombay Stock Exchange is Scheduled on 04/03/2025 on 3:30 with Zoom Meeting App"
     },
-   
     {
         "Title": "Event Bar",
-        "date": "false"
+        "date": "false",
         "body": "false"
     },
-   
     {
         "Title": "Event Bar",
-        "date": "false"
+        "date": "false",
         "body": "false"
     }
 ]
