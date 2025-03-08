@@ -1,19 +1,18 @@
 [
-  {
-    "Name": "Event Bar",
-    "visible": "true"
-  },
-   {
-    "Name": "Assignments",
-    "visible": "true"
-  },
-   {
-    "Name": "Notes",
-    "visible": "true"
-  },
-{
-    "Name": "Announcements",
-    "visible": "true"
-    "updates": "1,2,3"
-  }
+    {
+        "Name": "Event Bar",
+        "visible": "true"
+    },
+    {
+        "Name": "Assignments",
+        "visible": "true"
+    },
+    {
+        "Name": "Notes",
+        "visible": "true"
+    },
+    {
+        "Name": "Notes",
+        "visible": "true"
+    }
 ]
