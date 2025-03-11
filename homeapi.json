@@ -1,4 +1,14 @@
 {
+"Interface":[
+    {
+        "Name": "Home_title",
+        "text": "FY-BAF"
+    },
+    {
+        "Name": "Sidebar_greetings",
+        "text": "Welcome"
+    }
+],
 "visibility":[
     {
         "Name": "Event Bar",
