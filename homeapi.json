@@ -1,4 +1,22 @@
 {
+"visibility":[
+    {
+        "Name": "Event Bar",
+        "visible": "false"
+    },
+    {
+        "Name": "Assignments",
+        "visible": "true"
+    },
+    {
+        "Name": "Notes",
+        "visible": "false"
+    },
+    {
+        "Name": "Updates",
+        "visible": "true"
+    }
+],
 "assignments": [
   {
     "Name": "1. Foundation of Behavioral Skills",
