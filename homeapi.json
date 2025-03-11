@@ -16,7 +16,7 @@
 "visibility":[
     {
         "Name": "Event Bar",
-        "visible": "false"
+        "visible": "true"
     },
     {
         "Name": "Assignments",
