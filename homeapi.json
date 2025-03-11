@@ -2,11 +2,11 @@
 "Interface":[
     {
         "Name": "Home_title",
-        "text": "FY-BAF"
+        "data": "FY-BAF"
     },
     {
         "Name": "Sidebar_greetings",
-        "text": "Welcome"
+        "data": "Welcome"
     }
 ],
 "visibility":[
