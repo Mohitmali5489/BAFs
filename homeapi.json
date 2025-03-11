@@ -1,6 +1,10 @@
 {
 "Interface":[
     {
+        "Name": "commit",
+        "data": "1"
+    },
+    {
         "Name": "Home_title",
         "data": "FY-BAF"
     },
