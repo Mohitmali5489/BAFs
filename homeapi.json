@@ -11,6 +11,14 @@
     {
         "Name": "Sidebar_greetings",
         "data": "Welcome"
+    },
+    {
+        "Name": "Confess_title",
+        "data": "Mohit Mali"
+    },
+    {
+        "Name": "Con_fesses",
+        "data": "Welcome"
     }
 ],
 "visibility":[
