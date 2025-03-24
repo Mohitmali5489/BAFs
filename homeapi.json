@@ -36,7 +36,7 @@
     },
     {
         "Name": "Notes",
-        "visible": "false"
+        "visible": "true"
     },
     {
         "Name": "Updates",
@@ -84,14 +84,14 @@
   {
     "Name": "Notes 1",
     "title": "Time Table",
-    "img": "https://i.ibb.co/SwLtQ6Sr/accounts.png",
+    "img": "https://i.ibb.co/PZzfSRy7/time-table.webp",
     "href": "https://mohitmali5489.github.io/BAFs/SEMII_Exam.html",
     "visible": "false"
   },
    {
    "Name": "Notes 2",
     "title": "Paper pattern",
-   "img": "https://i.ibb.co/SwLtQ6Sr/accounts.png",
+   "img": "https://i.ibb.co/DHsk5fdT/174280701933062589.png",
     "href": "https://bafbkbnc.wordpress.com/2025/02/15/fybaf-vocational-skills-in-ac-and-fin-iv/",
     "visible": "false"
   }
