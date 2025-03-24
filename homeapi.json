@@ -40,7 +40,7 @@
     },
     {
         "Name": "Updates",
-        "visible": "true"
+        "visible": "false"
     }
 ],
 "assignments": [
