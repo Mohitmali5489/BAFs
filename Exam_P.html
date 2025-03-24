@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Business</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0b121e;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .search-box {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+        .faq-question {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .faq-question:hover {
+            background: #0056b3;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 5px solid #007BFF;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Introduction to Business - Question Bank</h1>
+    
+    <input type="text" class="search-box" id="search" placeholder="Search for a topic..." onkeyup="searchFAQ()">
+
+    <div id="faq-list">
+        <!-- FAQ Items -->
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Characteristics of Business</div>
+            <div class="faq-answer">
+                <p>Business refers to an economic activity where goods and services are produced, sold, and exchanged for profit. A business operates in a dynamic environment influenced by various internal and external factors.</p>
+    <ul>
+     <br>   <li><strong>Economic Activity</strong> – Business involves production, distribution, and exchange of goods and services to earn profits.</li>
+     <br>   <li><strong>Profit Motive</strong> – The primary goal of a business is to generate profit, which ensures sustainability and growth.</li>
+    <br>    <li><strong>Production of Goods and Services</strong> – Businesses provide products or services to fulfill customer needs and wants.</li>
+       <br> <li><strong>Risk and Uncertainty</strong> – Every business faces risks such as market competition, economic fluctuations, and legal changes.</li>
+      <br>  <li><strong>Continuous Process</strong> – Business is an ongoing process that continues as long as there is demand and supply.</li>
+        <br><li><strong>Customer Satisfaction</strong> – A successful business focuses on meeting customer expectations and delivering quality products/services.</li>
+       <br> <li><strong>Social Responsibility</strong> – Modern businesses consider ethical practices and corporate social responsibility (CSR) in their operations.</li>
+       <br> <li><strong>Legal Compliance</strong> – Businesses must follow government laws, regulations, and policies to operate legally.</li>
+       <br> <li><strong>Capital Investment</strong> – Starting and running a business requires financial resources for infrastructure, production, and marketing.</li>
+       <br> <li><strong>Innovation and Adaptability</strong> – Businesses must innovate and adapt to changing market trends and technological advancements.</li>
+    </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Objectives of Business</div>
+            <div class="faq-answer">
+                <p>Business objectives guide an organization’s activities and decisions. Key objectives include:</p>
+                <ul>
+                    <li>Economic Objectives: Profit Maximization, Cost Efficiency</li>
+                    <li>Social Objectives: Employee Welfare, Community Development</li>
+                    <li>Strategic Objectives: Market Expansion, Innovation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Importance of Corporate Social Responsibility (CSR)</div>
+            <div class="faq-answer">
+                <p>CSR refers to businesses contributing to social and environmental well-being. Importance includes:</p>
+                <ul>
+                    <li>Improves Brand Image</li>
+                    <li>Enhances Customer Loyalty</li>
+                    <li>Boosts Employee Morale</li>
+                    <li>Ensures Sustainable Development</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Need for Business Environment</div>
+            <div class="faq-answer">
+                <p>The business environment includes all external factors that impact business operations. Key reasons why it is important:</p>
+                <ul>
+                    <li>Helps in Strategic Planning</li>
+                    <li>Identifies Market Trends</li>
+                    <li>Encourages Adaptability</li>
+                    <li>Enhances Competitive Advantage</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Types of Entrepreneurs</div>
+            <div class="faq-answer">
+                <p>Entrepreneurs can be classified based on various factors such as innovation, risk-taking, and business scale. Common types include:</p>
+                <ul>
+                    <li>Innovative Entrepreneurs</li>
+                    <li>Imitative Entrepreneurs</li>
+                    <li>Social Entrepreneurs</li>
+                    <li>Technopreneurs</li>
+                    <li>Scalable Startup Entrepreneurs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Liberalization, Privatization, and Globalization (LPG)</div>
+            <div class="faq-answer">
+                <p>LPG reforms opened up economies worldwide, driving trade and investments.</p>
+                <ul>
+                    <li><b>Liberalization:</b> Removing trade barriers, reducing government control.</li>
+                    <li><b>Privatization:</b> Transfer of government-owned businesses to private hands.</li>
+                    <li><b>Globalization:</b> Integration of economies through trade, technology, and culture.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(this)">Merger, Takeover, and Amalgamation Strategies</div>
+            <div class="faq-answer">
+                <p>Businesses use these strategies to grow and remain competitive.</p>
+                <ul>
+                    <li><b>Merger:</b> Two companies join to form one entity.</li>
+                    <li><b>Takeover:</b> One company acquires another.</li>
+                    <li><b>Amalgamation:</b> Combination of multiple companies to form a new entity.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function toggleAnswer(element) {
+        var answer = element.nextElementSibling;
+        answer.style.display = (answer.style.display === "block") ? "none" : "block";
+    }
+
+    function searchFAQ() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach(item => {
+            let question = item.querySelector(".faq-question").textContent.toLowerCase();
+            if (question.includes(input)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
