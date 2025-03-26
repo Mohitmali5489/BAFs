@@ -44,11 +44,7 @@
         h1 {
             color: #333;
         }
-        #countdown {
-            font-size: 24px;
-            font-weight: bold;
-            
-        }
+      
     </style>
 </head>
 <body>
@@ -56,42 +52,7 @@
 
     <div class="container">
     
-    <h1>Exam Countdown for Introduction to Business:</h1>
-    <div id="countdown" class="timer">Loading...</div><br>
-
-    <script>
-        function updateCountdown() {
-            // Set the exam date and time (YYYY, MM-1, DD, HH, MM)
-            const examDate = new Date(2025, 3, 17, 17, 0, 0); // Change this to your exam date (April 30, 2025, at 9:00 AM)
-
-            const now = new Date();
-            const timeLeft = examDate - now;
-
-            if (timeLeft <= 0) {
-                document.getElementById("countdown").innerHTML = "🎉 Exam Started! Good Luck! 📖";
-                return;
-            }
-
-            // Convert timeLeft into days, hours, minutes, seconds
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            // Display countdown
-            document.getElementById("countdown").innerHTML = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s left!`;
-
-            // Update every second
-            setTimeout(updateCountdown, 1000);
-        }
-
-        updateCountdown(); // Start the countdown
-    </script>
-    
-    
-    
-    
+   
         <h2>Qustion Bank</h2>
         
      
