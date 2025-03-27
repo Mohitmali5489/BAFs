@@ -45,40 +45,40 @@
 ],
 "assignments": [
   {
-    "Name": "1. Foundation of Behavioral Skills",
+    "Name": "",
+    "title": "Introduction to Business",
+   "img": "https://i.ibb.co/zWL8jyfn/image.png",
+    "href": "https://mohitmali5489.github.io/BAFs/5.html",
+    "visible": "true"
+  },
+    {
+    "Name": "",
     "title": "Foundation of Behavioral Skills",
     "img": "https://i.ibb.co/nMPM2kdn/image.png",
     "href": "https://mohitmali5489.github.io/BAFs/1.html",
     "visible": "true"
   },
   {
-    "Name": "2. Vocational Skills in AC and Fin IV",
+    "Name": "",
     "title": "Vocational Skills in AC and Fin IV",
     "img": "https://i.ibb.co/jZjkHgrs/image.png",
     "href": "https://mohitmali5489.github.io/BAFs/2.html",
     "visible": "true"
   },
   {
-    "Name": "3. Vocational Skills in AC and Fin III",
+    "Name": "",
     "title": "Vocational Skills in AC and Fin III",
     "img": "https://i.ibb.co/fKq9NmT/image.png",
     "href": "https://mohitmali5489.github.io/BAFs/3.html",
     "visible": "true"
   },
   {
-    "Name": "4. Social Media Marketing",
+    "Name": "",
     "title": "Social Media Marketing",
     "img": "https://i.ibb.co/g507cBq/image.png",
     "href": "https://mohitmali5489.github.io/BAFs/4.html",
     "visible": "true"
-  },
-  {
-    "Name": "5. App Update Required",
-    "title": "",
-   "img": "https://knowledge.carolina.com/wp-content/uploads/2021/08/graph_3068300.jpg",
-    "href": "https://mohitmali5489.github.io/BAFs/5.html",
-    "visible": "false"
-  }
+  }  
 ],
 "notes": [
   {
