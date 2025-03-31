@@ -66,8 +66,8 @@
 
 <div class="container">
 <br>
-    <h2>Vocational Skills in AC and Fin III</h2>        
-        <h1 align="center"><strong>Module 1</strong></h1>
+    <h2>Question Bank</h2>        
+        <h3 align="center"><strong>Module 1</strong></h3>
         <h1 class="question"><strong>1. Explain the role of forecasting in finance decision making.</strong></h1>
         <div class="answer">
             <p>Forecasting plays a crucial role in financial decision-making as it helps businesses and individuals anticipate future financial conditions and make informed decisions. Here’s how it contributes:</p>
@@ -152,7 +152,7 @@
             <p>A cash budget represents an itemized list of all the sources and uses of cash in a given period. It then rolls it using the current cash balance, creating a plan to manage the net cash position of the period in review.</p>
         </div>
 <br>
-           <h1 align="center"><strong>Module 2</strong></h1><br>
+           <h3 align="center"><strong>Module 2</strong></h3><br>
         <h1 class="question"><strong>1. Explain trend analysis using Excel.</strong></h1>
         <div class="answer">
             <p><strong>Trend Analysis in Excel</strong> involves identifying patterns in data over time to make forecasts or analyze growth, decline, or stability. Excel is a powerful tool for this, thanks to its built-in functions and features like graphs, trendlines, and formulas. Here’s how to perform trend analysis using Excel:</p>
@@ -212,9 +212,9 @@
         
         <h1 class="question"><strong>2. How to Calculate Moving Averages in Excel.</strong></h1>
         <div class="answer">
-            <h4 style="text-align: left"><strong>How to Calculate Moving Averages in Excel</strong></h4>
+            
             <p>A <strong>Moving Average</strong> is a technique used to smooth out fluctuations in data and identify trends over time. Excel provides multiple ways to calculate moving averages:</p>
-            <h4 style="text-align: left">Method 1: Using the AVERAGE Formula</h4>
+            <p style="text-align: left">Method 1: Using the AVERAGE Formula</p>
             <h3><strong>Steps:</strong></h3>
             <ol>
                 <li><strong>Prepare your data</strong> (e.g., Date & Sales).</li>
@@ -227,7 +227,7 @@
                     </ul>
                 </li>
             </ol>
-            <h4 style="text-align: left">Method 2: Using the Data Analysis Toolpak</h4>
+            <hp style="text-align: left">Method 2: Using the Data Analysis Toolpak</p>
             <h3><strong>Steps:</strong></h3>
             <ol>
                 <li>
@@ -251,7 +251,7 @@
                     </ul>
                 </li>
             </ol>
-            <h4 style="text-align: left">Method 3: Using the AVERAGEIF Formula for Dynamic Ranges</h4>
+            <p style="text-align: left">Method 3: Using the AVERAGEIF Formula for Dynamic Ranges</p>
             <p>If you want to calculate a moving average dynamically:</p>
             <pre><code>=AVERAGE(OFFSET(B2,COUNT(B:B)-3,0,3,1))</code></pre>
             <ul>
@@ -261,16 +261,16 @@
         
         <h1 class="question"><strong>3. How to Calculate the Forecast Function in Excel.</strong></h1>
         <div class="answer">
-            <h4 style="text-align: left">How to Use the FORECAST Function in Excel</h4>
+            
             <p>The <strong>FORECAST</strong> function in Excel is used to predict future values based on existing data using linear regression.</p>
-            <h4 style="text-align: left">Syntax</h4>
+            <p style="text-align: left">Syntax</p>
             <pre><code>=FORECAST(x, known_y's, known_x's)</code></pre>
             <ul>
                 <li><strong>x</strong>: The point for which you want to forecast a value.</li>
                 <li><strong>known_y’s</strong>: The dependent data range (e.g., sales figures).</li>
                 <li><strong>known_x’s</strong>: The independent data range (e.g., time periods).</li>
             </ul>
-            <h4 style="text-align: left">Example Scenario</h4>
+            <p style="text-align: left">Example Scenario</p>
             <p>Suppose you have the following data:</p>
             <table>
                 <tbody>
@@ -296,22 +296,22 @@
                     </tr>
                 </tbody>
             </table>
-            <h4 style="text-align: left">Steps</h4>
+            <p style="text-align: left">Steps</p>
             <ol>
                 <li><strong>Enter the Forecast Formula:</strong></li>
                 <pre><code>=FORECAST(2024, B2:B5, A2:A5)</code></pre>
                 <li><strong>Press Enter</strong> – The forecasted sales for 2024 will appear.</li>
             </ol>
-            <h4 style="text-align: left">Using FORECAST.LINEAR (Newer Excel Versions)</h4>
+            <p style="text-align: left">Using FORECAST.LINEAR (Newer Excel Versions)</p>
             <pre><code>=FORECAST.LINEAR(2024, B2:B5, A2:A5)</code></pre>
-            <h4 style="text-align: left">Advanced Forecasting with FORECAST.ETS</h4>
+            <p style="text-align: left">Advanced Forecasting with FORECAST.ETS</p>
             <pre><code>=FORECAST.ETS(target_date, values, timeline, [seasonality], [data_completion], [aggregation])</code></pre>
-            <h4 style="text-align: left">Visualization</h4>
+            <p style="text-align: left">Visualization</p>
             <ol>
                 <li>Create a <strong>scatter plot</strong> or <strong>line chart</strong> in Excel.</li>
                 <li>Add a <strong>trendline</strong> and select “Display Equation on chart” to see the formula.</li>
             </ol>
-            <h4 style="text-align: left">Additional Tips</h4>
+            <p style="text-align: left">Additional Tips</p>
             <ul>
                 <li>Ensure <strong>known_x’s</strong> and <strong>known_y’s</strong> have equal length.</li>
                 <li>Use <strong>FORECAST.ETS.CONFINT</strong> to calculate confidence intervals.</li>
