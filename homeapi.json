@@ -40,7 +40,7 @@
     },
     {
         "Name": "Updates",
-        "visible": "false"
+        "visible": "true"
     }
 ],
 "assignments": [
@@ -99,14 +99,14 @@
 ],
 "announcements": [
     {
-        "Title": "Holiday Notice",
-        "date": "March  13, 2025",
-        "body": "The college will remain closed on Friday, the 14th March, 2025 on account of Holi (Second Day)."
+        "Title": "Auditing QB",
+        "date": "April  2, 2025 1:00pm",
+        "body": "I have Forwrded Auditing Important Q&As in Unofficial with harsh and QB is available in Exam Poral with same answers in proper Format"
     },
     {
         "Title": "BSE Session",
         "date": "March 3, 2025",
-        "body": "Final session on Bombay Stock Exchange is Scheduled on 04/03/2025 on 3:30 with Zoom Meeting App"
+        "body": "false"
     },
     {
         "Title": "Event Bar",
