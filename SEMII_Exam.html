@@ -38,7 +38,7 @@
         function getNextExam() {
             let now = new Date();
             for (let exam of exams) {
-                let examDate = new Date(exam.date + 'T17:00:00'); // Exam at 5:00 PM
+                let examDate = new Date(exam.date + 'T17:30:00'); // Exam at 5:30 PM
                 if (now < examDate) {
                     return { ...exam, date: examDate };
                 }
