@@ -44,13 +44,6 @@
     }
 ],
 "assignments": [
-  {
-    "Name": "2",
-    "title": "Marathi (लेखन कौशल्य)",
-    "img": "https://i.ibb.co/wNgGQxHT/image.png",
-    "href": "2",
-    "visible": "true"
-  },
     {
     "Name": "5",
     "title": "Sports Notes Overview",
@@ -80,6 +73,13 @@
     "href": "4",
     "visible": "true"
   }  
+{
+    "Name": "2",
+    "title": "Financial Accounting II",
+    "img": "https://i.ibb.co/ZpcnH0Z9/image.png",
+    "href": "2",
+    "visible": "true"
+  }
 ],
 "notes": [
   {
