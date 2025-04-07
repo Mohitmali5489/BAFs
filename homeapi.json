@@ -99,14 +99,14 @@
 ],
 "announcements": [
     {
-        "Title": "Marathi Exam",
-        "date": "April 4, 2025 12:09pm",
-        "body": "Easy Crack: If you only prepare 10 imp qustions you'll get min 15 marks, also you will able to answer other similar questions."
-    },
-    {
         "Title": "Offline Feature",
         "date": "April 2, 2025 1:08pm",
         "body": "If you open app without internet, Downloads Section will open, where you can View Tops 5 Upcoming Exams QB offline"
+    },
+    {
+        "Title": "Marathi Exam",
+        "date": "April 4, 2025 12:09pm",
+        "body": "Easy Crack: If you only prepare 10 imp qustions you'll get min 15 marks, also you will able to answer other similar questions."
     },
     {
         "Title": "Auditing",
