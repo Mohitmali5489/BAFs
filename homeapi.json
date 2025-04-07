@@ -18,7 +18,7 @@
     },
     {
         "Name": "Con_fesses",
-        "data": "Be Ready! To make a record of writing 6 writing skills questions in 60 mins."
+        "data": "All the Best for today's Exam 👍"
     },
     {
         "Name": "Con_fesses",
@@ -53,7 +53,7 @@
   },
     {
     "Name": "5",
-    "title": "Sports Question Bank",
+    "title": "Sports Notes Overview",
    "img": "https://i.ibb.co/Kx5Z34bj/image.png",
     "href": "5",
     "visible": "true"
@@ -91,7 +91,7 @@
   },
    {
    "Name": "Notes 2",
-    "title": "Paper patterns",
+    "title": "Paper Patterns",
    "img": "https://i.ibb.co/rKT2wPKS/paper.webp",
     "href": "https://mohitmali5489.github.io/BAFs/Exam_P.html",
     "visible": "false"
