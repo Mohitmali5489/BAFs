@@ -43,14 +43,7 @@
         "visible": "false"
     }
 ],
-"assignments": [
-    {
-    "Name": "5",
-    "title": "Sports Notes Overview",
-   "img": "https://i.ibb.co/Kx5Z34bj/image.png",
-    "href": "5",
-    "visible": "true"
-  }, 
+"assignments": [ 
     {
     "Name": "1",
     "title": "Foundation of Behavioral Skills",
@@ -78,6 +71,13 @@
     "title": "Financial Accounting II",
     "img": "https://i.ibb.co/ZpcnH0Z9/image.png",
     "href": "https://drive.google.com/file/d/1RHpyb-uzqyMRLvtPiG76EB2_ui8VNDSY/view",
+    "visible": "true"
+  },
+      {
+    "Name": "5",
+    "title": "Auditing II",
+   "img": "https://i.ibb.co/cX3rtXJy/image.png",
+    "href": "5",
     "visible": "true"
   }
 ],
