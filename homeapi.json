@@ -44,14 +44,7 @@
     }
 ],
 "assignments": [ 
-    {
-    "Name": "1",
-    "title": "Foundation of Behavioral Skills",
-    "img": "https://i.ibb.co/nMPM2kdn/image.png",
-    "href": "1",
-    "visible": "true"
-  },
-  
+
   {
     "Name": "3",
     "title": "Environmental Science",
@@ -78,6 +71,13 @@
     "title": "Auditing Question Bank",
    "img": "https://i.ibb.co/ns7f7wmz/image.png",
     "href": "5",
+    "visible": "true"
+  },
+     {
+    "Name": "1",
+    "title": "Introduction to Business",
+    "img": "https://i.ibb.co/zVG3NyYh/image.png",
+    "href": "1",
     "visible": "true"
   }
 ],
