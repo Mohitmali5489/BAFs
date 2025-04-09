@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Social Media Marketing</title>
+  <title>Foundation of Behavioral Skills</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     :root {
@@ -13,6 +13,7 @@
       --border-color: #2196f3;
     }
 
+    /* Theme presets */
     body.dark-mode {
       --bg-color: #121212;
       --text-color: #e0e0e0;
@@ -20,11 +21,67 @@
       --border-color: #64b5f6;
     }
 
+    body.sepia-mode {
+      --bg-color: #f4ecd8;
+      --text-color: #3e2f1c;
+      --box-color: #fdf6e3;
+      --border-color: #a98244;
+    }
+
+    body.solarized-mode {
+      --bg-color: #fdf6e3;
+      --text-color: #657b83;
+      --box-color: #eee8d5;
+      --border-color: #268bd2;
+    }
+
+    body.highcontrast-mode {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --box-color: #1a1a1a;
+      --border-color: #ffcc00;
+    }
+
+    body.midnight-mode {
+      --bg-color: #0d1b2a;
+      --text-color: #e0e1dd;
+      --box-color: #1b263b;
+      --border-color: #00b4d8;
+    }
+
+    body.forest-mode {
+      --bg-color: #1c352d;
+      --text-color: #d1e7dd;
+      --box-color: #284f3b;
+      --border-color: #81c784;
+    }
+
+    body.lavender-mode {
+      --bg-color: #f3f0ff;
+      --text-color: #3c096c;
+      --box-color: #e6e0f8;
+      --border-color: #9d4edd;
+    }
+
+    body.rose-mode {
+      --bg-color: #fff0f3;
+      --text-color: #800f2f;
+      --box-color: #ffe0e9;
+      --border-color: #d6336c;
+    }
+
+    body.warmgray-mode {
+      --bg-color: #f7f4f2;
+      --text-color: #3a3a3a;
+      --box-color: #eae7e1;
+      --border-color: #6c757d;
+    }
+
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: 'Georgia', serif;
-      padding: 20px 0;
+      padding: 60px 20px 20px;
       display: flex;
       justify-content: center;
       font-size: 14px;
@@ -75,11 +132,19 @@
       margin-bottom: 10px;
     }
 
-    .toggle-container {
+    .theme-switcher {
       position: fixed;
       top: 10px;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 1000;
+      background: var(--box-color);
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     @media print {
@@ -97,271 +162,85 @@
         border-left: 3px solid #000;
       }
 
-      .toggle-container {
+      .theme-switcher {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="toggle-container">
-    <button class="btn btn-sm btn-outline-primary" onclick="toggleMode()">Change Mode</button>
+  <div class="theme-switcher">
+    <label for="themeSelect" class="form-label m-0">Theme:</label>
+    <select id="themeSelect" onchange="changeTheme(this.value)" class="form-select form-select-sm">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="sepia">Sepia</option>
+      <option value="solarized">Solarized</option>
+      <option value="highcontrast">High Contrast</option>
+      <option value="midnight">Midnight Blue</option>
+      <option value="forest">Forest Green</option>
+      <option value="lavender">Lavender</option>
+      <option value="rose">Rose</option>
+      <option value="warmgray">Warm Gray</option>
+    </select>
   </div>
 
   <div class="pdf-page">
     <h2>Question Bank</h2>
 
-   <p style="text-align: center;"><span style="color: red;"><b>(Note: Some Answers are Practical based, may feel lengthy)</b></span></p>
-    <h3 align="center"><b>Module 1</b></h3>
-    
-    <p class="question"><strong>1. Define and explain the purpose of social media marketing.</strong></p>
+    <h1 class="question">1. Define leadership and state its functions</h1>
     <div class="answer">
-        <p><strong>Social Media Marketing</strong> refers to the process of using social media platforms (such as Facebook, Instagram, Twitter, LinkedIn, etc.) to promote a brand, product, or service. It involves creating and sharing content, engaging with followers, running ads, and building a brand’s presence online to achieve business goals.</p>
-        <p>The purpose of social media marketing includes:</p>
-        <ol>
-            <li>
-                <p><strong>Brand Awareness</strong>: Social media provides an opportunity to introduce a brand to a large audience. It’s an essential tool for making potential customers aware of what a brand offers.</p>
-            </li>
-            <li>
-                <p><strong>Engagement and Community Building</strong>: Through regular interaction with followers (via comments, likes, shares, etc.), brands can build a community of loyal customers. Engaging with users can increase customer loyalty and brand advocacy.</p>
-            </li>
-            <li>
-                <p><strong>Lead Generation and Sales</strong>: Social media platforms allow businesses to directly promote their products and services, often with the help of paid ads, which can lead to conversions like sales, sign-ups, or inquiries.</p>
-            </li>
-            <li>
-                <p><strong>Cost-Effective Marketing</strong>: Social media marketing can be more affordable compared to traditional advertising methods. It allows even small businesses to reach a large audience with minimal budget through organic posts and targeted ads.</p>
-            </li>
-            <li>
-                <p><strong>Reputation Management</strong>: Brands can manage their reputation by responding to customer feedback, reviews, and comments, addressing any issues that arise in a timely and professional manner.</p>
-            </li>
-        </ol>
+      <p><strong>Introduction:</strong> Leadership is the ability to inspire, motivate, and guide individuals or groups towards the achievement of goals. It plays a crucial role in both professional and personal life, shaping the direction and success of any organization or team.</p>
+      <p><strong>Key Functions of Leadership:</strong></p>
+      <ol>
+        <li>Visionary Thinking – A leader must have a clear vision and goals for the future.</li>
+        <li>Effective Communication – Strong leaders express their ideas clearly and listen actively.</li>
+        <li>Decision-Making Skills – Quick and rational decision-making is vital.</li>
+        <li>Integrity and Honesty – Ethical behavior builds trust and credibility.</li>
+        <li>Empathy – Understanding and considering team members’ emotions and perspectives.</li>
+        <li>Adaptability – Adjusting to changes and challenges with a positive attitude.</li>
+        <li>Confidence – A leader must be self-assured and inspire confidence in others.</li>
+        <li>Delegation Skills – Assigning tasks effectively to team members.</li>
+        <li>Problem-Solving Abilities – Addressing issues with creative solutions.</li>
+        <li>Motivational Abilities – Encouraging and inspiring the team to achieve goals.</li>
+      </ol>
     </div>
-    
-    <p class="question"><strong>2. Explain the importance of SMM in the digital landscape.</strong></p>
+
+    <h1 class="question">2. Write a detailed note on life skills recommended by the WHO.</h1>
     <div class="answer">
-        <p>Social Media Marketing (SMM) plays a critical role in the <strong>digital landscape</strong> due to the vast and ever-growing presence of social platforms in people's daily lives. The importance of SMM can be broken down into several key factors:</p>
-        <p><strong>1. Massive Audience Reach</strong>: Social media platforms like Facebook, Instagram, Twitter, TikTok, and LinkedIn have billions of active users. This offers brands an unprecedented opportunity to reach a vast and diverse audience. SMM allows businesses to target specific demographics based on location, age, interests, and behaviors, which increases the chances of reaching the right audience.</p>
-        <p><strong>2. Brand Visibility and Recognition</strong>: In a crowded digital world, maintaining visibility is crucial. Social media allows brands to consistently appear in front of their audience, keeping their name top of mind. Regular posts, stories, and advertisements help reinforce the brand's image and message, leading to better recognition and recall.</p>
-        <p><strong>3. Real-Time Interaction and Engagement</strong>: SMM provides a platform for businesses to engage with their audience in real-time. Responding to customer queries, participating in conversations, and addressing concerns or complaints quickly helps build trust and loyalty. This immediate connection humanizes the brand and strengthens relationships with customers.</p>
-        <p><strong>4. Cost-Effective Marketing</strong>: Compared to traditional forms of advertising (TV, print, billboards), social media marketing can be much more affordable. With options for both organic and paid content, businesses of all sizes—whether small startups or large corporations—can leverage social media to promote their products or services without breaking the bank. Ads on platforms like Facebook and Instagram can be tailored to fit virtually any budget.</p>
-        <p><strong>5. Targeted Advertising</strong>: Social media platforms offer advanced targeting capabilities, allowing businesses to tailor their advertisements to specific groups based on user data (e.g., interests, demographics, location, behavior). This targeted approach ensures that businesses can reach the right people at the right time, increasing the likelihood of conversions and minimizing wasted ad spend.</p>
+      <p>The World Health Organization (WHO) has identified ten essential life skills that are important for individuals to lead a successful and balanced life. These are:</p>
+      <ul>
+        <li><strong>Self-awareness:</strong> Understanding one's strengths, weaknesses, emotions, and values.</li>
+        <li><strong>Empathy:</strong> Understanding and sharing others' feelings.</li>
+        <li><strong>Critical thinking:</strong> Objectively analyzing information and situations.</li>
+        <li><strong>Creative thinking:</strong> Finding innovative solutions to problems.</li>
+        <li><strong>Decision-making:</strong> Choosing the best option from alternatives.</li>
+        <li><strong>Problem-solving:</strong> Identifying and resolving challenges effectively.</li>
+        <li><strong>Effective communication:</strong> Expressing thoughts and emotions clearly.</li>
+        <li><strong>Interpersonal relationships:</strong> Building and maintaining strong relationships.</li>
+        <li><strong>Coping with stress:</strong> Managing life’s pressures positively.</li>
+        <li><strong>Coping with emotions:</strong> Managing one's emotions to avoid impulsive actions.</li>
+      </ul>
     </div>
-    
-    <p class="question"><strong>3. Explain different social media platforms and their significance.</strong></p>
-    <div class="answer">
-        <p>Social media platforms each have their own unique features, user bases, and purposes, making them significant for different marketing strategies. Here's an overview of some of the most popular platforms and their significance:</p>
-        <p><strong>1. Facebook</strong>: Over 2.8 billion active users. It’s an essential tool for making potential customers aware of what a brand offers, building a community, and engaging with followers.</p>
-        <p><strong>2. Instagram</strong>: Over 2 billion active users. It’s ideal for visual branding and influencer marketing, allowing businesses to showcase products through engaging images and videos.</p>
-        <p><strong>3. Twitter</strong>: Over 450 million active users. It’s great for real-time communication, engaging with customers, and participating in trending topics.</p>
-        <p><strong>4. LinkedIn</strong>: Over 900 million active users. It’s the dominant platform for B2B marketing, allowing businesses to connect with professionals and establish authority.</p>
-        <p><strong>5. Snapchat</strong>: Over 500 million active users. It’s known for ephemeral content, making it ideal for promotions and targeting younger audiences.</p>
-        <p>Each social media platform offers unique advantages for businesses based on their audience, features, and content format. The right platform choice depends on the goals of the brand, whether it's building brand awareness, engaging with customers, generating leads, or selling products. Understanding the strengths of each platform helps brands optimize their marketing strategies and better connect with their target audience.</p>
-    </div>
-    
-    <p class="question"><strong>4. Illustrate the features of Facebook as a social media marketing tool.</strong></p>
-    <div class="answer">
-        <p>Facebook is one of the most powerful and widely used platforms for social media marketing. It offers a variety of features that allow businesses to reach, engage, and convert potential customers. Here are the key features of Facebook as a social media marketing tool:</p>
-        <p><strong>1. Facebook Pages</strong>: A Facebook Page is the central hub for a business, organization, or public figure on the platform. It allows businesses to post updates, share content, and interact with followers.</p>
-        <p><strong>2. Facebook Ads</strong>: Facebook Ads is an advertising platform that allows businesses to create and run paid ads to target specific audiences. It offers advanced targeting options based on demographics, interests, and behaviors.</p>
-        <p><strong>3. Facebook Insights (Analytics)</strong>: Facebook Insights provides data and analytics about how your page and posts are performing, helping businesses optimize their content and strategy.</p>
-        <p><strong>4. Facebook Messenger</strong>: Facebook Messenger allows businesses to communicate directly with customers in real-time, providing instant customer service and support.</p>
-        <p><strong>5. Facebook Marketplace</strong>: Facebook Marketplace is a platform within Facebook where individuals and businesses can buy and sell products locally, making it easier for users to browse and make purchases.</p>
-    </div>
-    
-    <p class="question"><strong>5. Explain in detail how to set up a Facebook business page.</strong></p>
-    <div class="answer">
-        <p>Setting up a <strong>Facebook Business Page</strong> is a straightforward process that allows businesses to establish an online presence on the platform, interact with customers, and leverage Facebook's marketing tools. Here’s a step-by-step guide to creating your Facebook Business Page:</p>
-        <p><strong>Step 1: Create a Facebook Account</strong> – You need a personal Facebook account to create a Business Page.</p>
-        <p><strong>Step 2: Start Creating Your Facebook Business Page</strong> – Log in to your Facebook account and go to the Facebook Business Pages section.</p>
-        <p><strong>Step 3: Enter Your Business Information</strong> – Provide your Page Name, Category, and Description.</p>
-        <p><strong>Step 4: Add Profile and Cover Photos</strong> – Upload a profile picture (usually your logo) and a cover photo that represents your brand.</p>
-        <p><strong>Step 5: Customize Your Business Page</strong> – Set up your username, business details, and additional information like hours of operation.</p>
-        <p><strong>Step 6: Create Your First Post</strong> – Add engaging content to your page to attract visitors.</p>
-        <p><strong>Step 7: Publish Your Page</strong> – Click the "Publish" button to make your page live.</p>
-        <p><strong>Step 8: Invite People to Like Your Page</strong> – Grow your audience by inviting friends and sharing your page.</p>
-        <p><strong>Step 9: Promote Your Page</strong> – Consider using Facebook Ads to reach a larger audience.</p>
-    </div>
-    
-    <p class="question"><strong>6. Explain in detail how to create a Facebook Ads campaign.</strong></p>
-    <div class="answer">
-        <p>Creating a Facebook Ads campaign involves a structured process where you define your campaign objectives, target audience, ad creative, budget, and optimization strategies. Here's a step-by-step guide on how to create an effective Facebook Ads campaign:</p>
-        <p><strong>Step 1: Access Facebook Ads Manager</strong> – Log in to Facebook and navigate to Ads Manager.</p>
-        <p><strong>Step 2: Choose Your Campaign Objective</strong> – Select an objective that aligns with your business goals, such as brand awareness, lead generation, or conversions.</p>
-        <p><strong>Step 3: Define Your Target Audience</strong> – Use Facebook’s targeting options to reach your ideal audience based on demographics, interests, and behaviors.</p>
-        <p><strong>Step 4: Set Your Budget and Schedule</strong> – Determine your daily or lifetime budget and set a schedule for your ad campaign.</p>
-        <p><strong>Step 5: Design Your Ad</strong> – Choose the ad format (carousel, single image, video, etc.) and create engaging content.</p>
-        <p><strong>Step 6: Review Your Ad and Launch</strong> – Check all elements of your ad, ensure everything is correct, and submit it for review.</p>
-        <p><strong>Step 7: Monitor and Optimize Your Campaign</strong> – Track performance metrics and make adjustments as necessary to improve results.</p>
-    </div>
-    
-    <p class="question"><strong>7. Write a short note on LinkedIn Marketing.</strong></p>
-    <div class="answer">
-        <p><strong>LinkedIn Marketing</strong> is a powerful strategy for businesses and professionals looking to enhance their brand visibility, engage with potential clients, and establish authority within their industry. As the world’s largest professional networking platform, LinkedIn offers unique opportunities for B2B (business-to-business) marketing, recruitment, and thought leadership.</p>
-        <p><strong>Key Aspects of LinkedIn Marketing:</strong></p>
-        <ol>
-            <li><strong>LinkedIn Company Pages</strong>: A central hub for your brand to share updates, industry news, and thought leadership content.</li>
-            <li><strong>LinkedIn Ads</strong>: Robust advertising options to target specific audiences based on professional criteria.</li>
-            <li><strong>Content Sharing & Engagement</strong>: Sharing insightful articles and engaging with your audience to build credibility.</li>
-            <li><strong>LinkedIn Groups</strong>: Engage with a community of professionals in a specific niche.</li>
-            <li><strong>Lead Generation</strong>: Capture leads through LinkedIn Lead Gen Forms and personalized messaging.</li>
-            <li><strong>Personal Branding & Thought Leadership</strong>: Establish yourself as an industry expert by sharing valuable content.</li>
-        </ol>
-    </div>
-    
-    <p class="question"><strong>8. Explain the role of influencers in social media marketing.</strong></p>
-    <div class="answer">
-        <p>Influencers have become integral to social media marketing because they can help brands reach targeted audiences, drive engagement, and build trust. Influencers are individuals with the ability to impact the purchasing decisions of others due to their established credibility, social following, and expertise in a particular niche.</p>
-        <p>Here’s a deeper look into the role of influencers in social media marketing:</p>
-        <ol>
-            <li><strong>Building Brand Awareness</strong>: Influencers can introduce a brand to a wider audience, particularly to those who might not have encountered it through traditional advertising.</li>
-            <li><strong>Creating Authentic Content</strong>: Influencers create organic, relatable, and personalized content that resonates with their audience.</li>
-            <li><strong>Boosting Engagement and Trust</strong>: Influencers have built strong, trusting relationships with their followers, who view them as credible sources of information.</li>
-            <li><strong>Targeting Specific Audiences</strong>: Influencers have followers that are highly targeted based on niche interests, demographics, or geographic locations.</li>
-            <li><strong>Driving Conversions and Sales</strong>: Influencers can influence purchase decisions by encouraging their followers to buy products, use discount codes, or check out the brand’s website.</li>
-        </ol>
-    </div>
-    
-    <p class="question"><strong>9. How to identify and collaborate with influencers to amplify the brand reach and engagement.</strong></p>
-    <div class="answer">
-        <p>Identifying and collaborating with influencers can significantly amplify your brand’s reach and engagement. Here’s a step-by-step guide to doing it effectively:</p>
-        <ol>
-            <li><strong>Identify the Right Influencers</strong>: Look for relevance, audience demographics, engagement rate, and authenticity.</li>
-            <li><strong>Use Tools to Find Influencers</strong>: Platforms like Instagram, YouTube, BuzzSumo, and Upfluence can help identify and analyze influencers.</li>
-            <li><strong>Categorize Influencers by Type</strong>: Understand the differences between nano, micro, macro, and mega influencers to choose the right fit for your brand.</li>
-            <li><strong>Reach Out and Build Relationships</strong>: Personalize your outreach and offer value to build a mutually beneficial collaboration.</li>
-            <li><strong>Choose Collaboration Strategies</strong>: Decide on sponsored posts, affiliate marketing, giveaways, or brand ambassadorships based on your goals.</li>
-            <li><strong>Track Performance and Optimize</strong>: Use UTM links, promo codes, or influencer-specific landing pages to measure impact and optimize future collaborations.</li>
-            <li><strong>Maintain Long-Term Relationships</strong>: Consistent partnerships build trust and authenticity, leading to better results over time.</li>
-        </ol>
-    </div>
-    
-    <p class="question"><strong>10. Write a short note on Twitter Marketing.</strong></p>
-    <div class="answer">
-        <p>Twitter marketing involves using the platform to promote brands, engage with audiences, and drive traffic. With its real-time updates, trending topics, and concise messaging, Twitter is a powerful tool for businesses to build brand awareness and customer relationships.</p>
-        <p><strong>Key Strategies for Twitter Marketing:</strong></p>
-        <ol>
-            <li><strong>Optimize Profile</strong>: Use a professional profile picture, bio, and relevant hashtags.</li>
-            <li><strong>Engaging Content</strong>: Post tweets that are informative, entertaining, or promotional with images, videos, and GIFs.</li>
-            <li><strong>Use Hashtags & Trends</strong>: Participate in trending topics to boost visibility.</li>
-            <li><strong>Interact & Engage</strong>: Respond to comments, retweet valuable content, and run polls.</li>
-            <li><strong>Twitter Ads</strong>: Utilize Promoted Tweets, Twitter Cards, and Follower Ads to reach a broader audience.</li>
-            <li><strong>Track Analytics</strong>: Monitor impressions, engagement rates, and click-throughs using Twitter Analytics.</li>
-        </ol>
-    </div>
-   <br> 
-    <h3 align="center"><b>Module 2</b></h3>
-    <div class="answer">
-        <p class="question"><strong>1. Write a short note on YouTube Marketing.</strong></p>
-        <p>YouTube marketing is the strategy of using YouTube to promote brands, products, or services through engaging video content. With over 2 billion active users, YouTube is a powerful platform for businesses to reach a global audience.</p>
-        <p><strong>Key Strategies for YouTube Marketing:</strong></p>
-        <ol>
-            <li><strong>Optimize Your Channel</strong>: Use a professional logo, banner, and keyword-rich descriptions.</li>
-            <li><strong>Create High-Quality Content</strong>: Tutorials, product reviews, vlogs, and behind-the-scenes videos work well.</li>
-            <li><strong>SEO for Visibility</strong>: Use relevant titles, descriptions, tags, and thumbnails to rank higher in search.</li>
-            <li><strong>Engagement & Community Building</strong>: Respond to comments, host live streams, and encourage subscriptions.</li>
-            <li><strong>YouTube Ads</strong>: Use skippable ads, non-skippable ads, and sponsored videos to target the right audience.</li>
-            <li><strong>Track Performance</strong>: Monitor views, watch time, and engagement through YouTube Analytics.</li>
-        </ol>
-        </div>
-        <p class="question"><strong>2. Write a short note on Email Marketing.</strong></p>
-         <div class="answer">
-        <p>Email marketing is a direct and cost-effective digital marketing strategy that involves sending emails to a targeted audience to promote products, services, or brand engagement. It is one of the highest ROI-generating marketing channels.</p>
-        <p><strong>Key Strategies for Email Marketing:</strong></p>
-        <ol>
-            <li><strong>Build a Quality Email List</strong>: Collect emails through website sign-ups, lead magnets, and social media.</li>
-            <li><strong>Segment Your Audience</strong>: Personalize emails based on demographics, interests, and behavior.</li>
-            <li><strong>Create Engaging Content</strong>: Use catchy subject lines, compelling copy, and visually appealing templates.</li>
-            <li><strong>Automation & Drip Campaigns</strong>: Send welcome emails, promotional offers, and follow-ups automatically.</li>
-            <li><strong>A/B Testing & Optimization</strong>: Test subject lines, CTA buttons, and email formats to improve open rates.</li>
-            <li><strong>Track Performance</strong>: Monitor open rates, click-through rates, and conversions using email analytics tools.</li>
-        </ol>
-        </div>
-        <p class="question"><strong>3. Explain different types of Emails and Email marketing Tools.</strong></p>
-         <div class="answer">
-        <p><strong>Types of Emails in Email Marketing:</strong></p>
-        <ol>
-            <li><strong>Promotional Emails</strong>: Used to promote products, discounts, and special offers.</li>
-            <li><strong>Transactional Emails</strong>: Automated emails triggered by user actions.</li>
-            <li><strong>Welcome Emails</strong>: Sent to new subscribers to introduce the brand.</li>
-            <li><strong>Newsletter Emails</strong>: Regular updates with valuable content, industry news, or company updates.</li>
-            <li><strong>Drip Campaign Emails</strong>: A series of automated emails sent based on user behavior.</li>
-            <li><strong>Re-engagement Emails</strong>: Sent to inactive subscribers to regain their interest.</li>
-            <li><strong>Survey & Feedback Emails</strong>: Sent to gather customer opinions.</li>
-        </ol>
-        <p><strong>Popular Email Marketing Tools:</strong></p>
-        <ol>
-            <li><strong>Mailchimp</strong>: Best for beginners; offers automation, templates, and analytics.</li>
-            <li><strong>Constant Contact</strong>: Great for small businesses with event marketing features.</li>
-            <li><strong>HubSpot Email Marketing</strong>: Ideal for inbound marketing and CRM integration.</li>
-            <li><strong>Sendinblue</strong>: Provides automation, SMS marketing, and AI-powered tools.</li>
-            <li><strong>ConvertKit</strong>: Best for creators and bloggers; allows advanced automation.</li>
-            <li><strong>AWeber</strong>: Offers customizable templates and autoresponders.</li>
-            <li><strong>GetResponse</strong>: Features landing pages, webinars, and advanced automation.</li>
-        </ol>
-        </div>
-        <p class="question"><strong>4. “Content management determines the effectiveness of digital marketing.” Critically examine the statement.</strong></p>
-         <div class="answer">
-        <p>Content management plays a crucial role in digital marketing, as high-quality, well-organized content enhances audience engagement, brand authority, and conversions. However, while content is vital, other factors such as SEO, social media strategy, and data analytics also contribute to digital marketing success.</p>
-        <p><strong>Importance of Content Management in Digital Marketing:</strong></p>
-        <ol>
-            <li><strong>Enhances Brand Awareness & Engagement</strong>: Well-structured content attracts and retains audience attention.</li>
-            <li><strong>Drives SEO Performance</strong>: Search engines rank websites based on relevant, high-quality content.</li>
-            <li><strong>Supports Lead Generation & Conversions</strong>: Informative and persuasive content encourages customer actions.</li>
-            <li><strong>Personalization & Customer Retention</strong>: Managing content effectively helps tailor messaging to different customer segments.</li>
-        </ol>
-        <p><strong>Challenges & Limitations of Content Management:</strong></p>
-        <ol>
-            <li><strong>Competition & Content Overload</strong>: With an abundance of online content, standing out is challenging.</li>
-            <li><strong>Changing Consumer Behavior</strong>: Content must be regularly updated to align with trends.</li>
-            <li><strong>Need for Multi-Channel Strategy</strong>: Content alone is not enough; it must be distributed effectively across platforms.</li>
-            <li><strong>Integration with Data Analytics</strong>: Content strategies must be backed by insights for optimization.</li>
-        </ol>
-        </div>
-        <p class="question"><strong>5. Write a short note on Search Engine Optimization (SEO).</strong></p>
-        <div class="answer">
-            <p>Search Engine Optimization (SEO) is the process of improving a website’s visibility on search engines like Google, Bing, and Yahoo. The goal of SEO is to increase organic (non-paid) traffic by optimizing content, structure, and technical aspects of a website.</p>
-            <p><strong>Key Components of SEO:</strong></p>
-            <ol>
-                <li><strong>On-Page SEO</strong>: Optimizing website content, meta tags, headings, images, and keyword usage.</li>
-                <li><strong>Off-Page SEO</strong>: Building backlinks, social media engagement, and influencer outreach.</li>
-                <li><strong>Technical SEO</strong>: Improving website speed, mobile-friendliness, indexing, and security (HTTPS).</li>
-                <li><strong>Local SEO</strong>: Optimizing for local searches with Google My Business and location-based keywords.</li>
-            </ol>
-            <p><strong>Benefits of SEO:</strong></p>
-            <ul>
-                <li>Increases website traffic and brand credibility.</li>
-                <li>Enhances user experience and site performance.</li>
-                <li>Generates high-quality leads and long-term results.</li>
-            </ul>
-        </div>
-        
-        <p class="question"><strong>6. Write a short note on Google ranking and Monetization.</strong></p>
-        <div class="answer">
-            <p><strong>Google Ranking</strong> refers to the position of a website or webpage in Google’s search results for a given query. Websites that rank higher receive more organic traffic.</p>
-            <p><strong>Factors Affecting Google Ranking:</strong></p>
-            <ol>
-                <li><strong>Quality Content</strong>: Relevant, original, and engaging content improves ranking.</li>
-                <li><strong>SEO Optimization</strong>: Proper use of keywords, meta tags, backlinks, and technical SEO.</li>
-                <li><strong>User Experience (UX)</strong>: Fast loading speed, mobile-friendliness, and easy navigation.</li>
-                <li><strong>Domain Authority</strong>: Strong backlink profile and credibility in the industry.</li>
-                <li><strong>Google’s Algorithm Updates</strong>: Staying updated with changes like Google Core Updates and Page Experience signals.</li>
-            </ol>
-            <p><strong>Google Monetization</strong> offers several ways to earn revenue from websites and content:</p>
-            <p><strong>Popular Monetization Methods:</strong></p>
-            <ol>
-                <li><strong>Google AdSense</strong>: Display ads on websites and earn money per click or impression.</li>
-                <li><strong>Affiliate Marketing</strong>: Promote third-party products and earn a commission on sales.</li>
-                <li><strong>Google AdMob</strong>: Monetize mobile apps with ads.</li>
-                <li><strong>YouTube Monetization</strong>: Earn through ad revenue, memberships, and Super Chats.</li>
-                <li><strong>Google News & Discover</strong>: Generate traffic for news content and monetize via ads.</li>
-            </ol>
-        </div>
-    </div>
-</div>
+  </div>
 
   <script>
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
+    function changeTheme(value) {
+      document.body.className = ""; // Reset
+      const themeMap = {
+        dark: "dark-mode",
+        sepia: "sepia-mode",
+        solarized: "solarized-mode",
+        highcontrast: "highcontrast-mode",
+        midnight: "midnight-mode",
+        forest: "forest-mode",
+        lavender: "lavender-mode",
+        rose: "rose-mode",
+        warmgray: "warmgray-mode"
+      };
+      if (themeMap[value]) {
+        document.body.classList.add(themeMap[value]);
+      }
     }
   </script>
 </body>
