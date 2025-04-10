@@ -87,14 +87,14 @@
     "title": "Exam Portal",
     "img": "https://i.ibb.co/nqgzPC51/174305336232895602.png",
     "href": "https://mohitmali5489.github.io/BAFs/SEMII_Exam.html",
-    "visible": "false"
+    "visible": "true"
   },
    {
    "Name": "Notes 2",
     "title": "Paper Patterns",
    "img": "https://i.ibb.co/rKT2wPKS/paper.webp",
     "href": "https://mohitmali5489.github.io/BAFs/Exam_P.html",
-    "visible": "false"
+    "visible": "true"
   }
 ],
 "announcements": [
