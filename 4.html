@@ -13,20 +13,23 @@
       --border-color: #2196f3;
     }
 
-    body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --box-color: #1e1e1e;
-      --border-color: #64b5f6;
-    }
+    /* Theme classes */
+    body.dark-mode { --bg-color: #121212; --text-color: #e0e0e0; --box-color: #1e1e1e; --border-color: #64b5f6; }
+    body.sepia-mode { --bg-color: #f4ecd8; --text-color: #3e2f1c; --box-color: #fdf6e3; --border-color: #a98244; }
+    body.solarized-mode { --bg-color: #fdf6e3; --text-color: #657b83; --box-color: #eee8d5; --border-color: #268bd2; }
+    body.highcontrast-mode { --bg-color: #000; --text-color: #fff; --box-color: #1a1a1a; --border-color: #ffcc00; }
+    body.midnight-mode { --bg-color: #0d1b2a; --text-color: #e0e1dd; --box-color: #1b263b; --border-color: #00b4d8; }
+    body.forest-mode { --bg-color: #1c352d; --text-color: #d1e7dd; --box-color: #284f3b; --border-color: #81c784; }
+    body.lavender-mode { --bg-color: #f3f0ff; --text-color: #3c096c; --box-color: #e6e0f8; --border-color: #9d4edd; }
+    body.rose-mode { --bg-color: #fff0f3; --text-color: #800f2f; --box-color: #ffe0e9; --border-color: #d6336c; }
+    body.warmgray-mode { --bg-color: #f7f4f2; --text-color: #3a3a3a; --box-color: #eae7e1; --border-color: #6c757d; }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: 'Georgia', serif;
-      padding: 20px 0;
-      display: flex;
-      justify-content: center;
+      padding: 20px 10px;
+      margin: 0;
       font-size: 14px;
       line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
@@ -34,19 +37,19 @@
 
     .pdf-page {
       background-color: var(--box-color);
-      padding: 40px;
-      max-width: 850px;
+      padding: 20px;
+      max-width: 900px;
       width: 100%;
+      margin: auto;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 0;
-      transition: background-color 0.3s;
+      border-radius: 5px;
     }
 
     h2 {
       text-align: center;
       color: var(--border-color);
       font-size: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       font-weight: bold;
     }
 
@@ -58,7 +61,7 @@
 
     .answer {
       background-color: var(--box-color);
-      padding: 20px;
+      padding: 15px;
       border-left: 4px solid var(--border-color);
       margin-top: 10px;
     }
@@ -75,11 +78,29 @@
       margin-bottom: 10px;
     }
 
-    .toggle-container {
-      position: fixed;
-      top: 10px;
-      right: 20px;
-      z-index: 1000;
+    .theme-select-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .theme-select-container label {
+      font-weight: 500;
+    }
+
+    select.form-select {
+      width: auto;
+      min-width: 150px;
+    }
+
+    @media (max-width: 600px) {
+      .theme-select-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media print {
@@ -89,7 +110,6 @@
 
       .pdf-page {
         box-shadow: none;
-        border: none;
         padding: 20mm;
       }
 
@@ -97,18 +117,31 @@
         border-left: 3px solid #000;
       }
 
-      .toggle-container {
+      .theme-select-container {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="toggle-container">
-    <button class="btn btn-sm btn-outline-primary" onclick="toggleMode()">Change Mode</button>
-  </div>
-
   <div class="pdf-page">
+
+    <div class="theme-select-container">
+      <label for="themeSelect">Select Theme:</label>
+      <select id="themeSelect" class="form-select form-select-sm" onchange="changeTheme(this.value)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="sepia">Sepia</option>
+        <option value="solarized">Solarized</option>
+        <option value="highcontrast">High Contrast</option>
+        <option value="midnight">Midnight Blue</option>
+        <option value="forest">Forest Green</option>
+        <option value="lavender">Lavender</option>
+        <option value="rose">Rose</option>
+        <option value="warmgray">Warm Gray</option>
+      </select>
+    </div>
+
     <h2>Question Bank</h2>
 
    <p style="text-align: center;"><span style="color: red;"><b>(Note: Some Answers are Practical based, may feel lengthy)</b></span></p>
@@ -360,8 +393,22 @@
 </div>
 
   <script>
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
+    function changeTheme(value) {
+      document.body.className = "";
+      const themeMap = {
+        dark: "dark-mode",
+        sepia: "sepia-mode",
+        solarized: "solarized-mode",
+        highcontrast: "highcontrast-mode",
+        midnight: "midnight-mode",
+        forest: "forest-mode",
+        lavender: "lavender-mode",
+        rose: "rose-mode",
+        warmgray: "warmgray-mode"
+      };
+      if (themeMap[value]) {
+        document.body.classList.add(themeMap[value]);
+      }
     }
   </script>
 </body>
