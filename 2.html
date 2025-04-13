@@ -1,75 +1,148 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Accounting II - Very Imp Theory</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            background-color: #0b121e;
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-           
-        }
-        .container {
-            max-width: 800px;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            
-        }
-     
-        h2 {
-            color: #007bff;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .question {
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-top: 20px;
-            color: #333;
-        }
-        .answer {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        h1 {
-            color: #333;
-        }
-      .header, .footer {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-        .subject {
-            text-align: center;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        .content {
-            text-align: justify;
-        }
-        .signature {
-            text-align: right;
-            margin-top: 30px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Financial Accounting II</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222;
+      --box-color: #fdfdfd;
+      --border-color: #2196f3;
+    }
+
+    /* Theme classes */
+    body.dark-mode { --bg-color: #121212; --text-color: #e0e0e0; --box-color: #1e1e1e; --border-color: #64b5f6; }
+    body.sepia-mode { --bg-color: #f4ecd8; --text-color: #3e2f1c; --box-color: #fdf6e3; --border-color: #a98244; }
+    body.solarized-mode { --bg-color: #fdf6e3; --text-color: #657b83; --box-color: #eee8d5; --border-color: #268bd2; }
+    body.highcontrast-mode { --bg-color: #000; --text-color: #fff; --box-color: #1a1a1a; --border-color: #ffcc00; }
+    body.midnight-mode { --bg-color: #0d1b2a; --text-color: #e0e1dd; --box-color: #1b263b; --border-color: #00b4d8; }
+    body.forest-mode { --bg-color: #1c352d; --text-color: #d1e7dd; --box-color: #284f3b; --border-color: #81c784; }
+    body.lavender-mode { --bg-color: #f3f0ff; --text-color: #3c096c; --box-color: #e6e0f8; --border-color: #9d4edd; }
+    body.rose-mode { --bg-color: #fff0f3; --text-color: #800f2f; --box-color: #ffe0e9; --border-color: #d6336c; }
+    body.warmgray-mode { --bg-color: #f7f4f2; --text-color: #3a3a3a; --box-color: #eae7e1; --border-color: #6c757d; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Georgia', serif;
+      padding: 20px 10px;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pdf-page {
+      background-color: var(--box-color);
+      padding: 20px;
+      max-width: 900px;
+      width: 100%;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--border-color);
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    h1.question {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .answer {
+      background-color: var(--box-color);
+      padding: 15px;
+      border-left: 4px solid var(--border-color);
+      margin-top: 10px;
+    }
+
+    ol, ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .theme-select-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .theme-select-container label {
+      font-weight: 500;
+    }
+
+    select.form-select {
+      width: auto;
+      min-width: 150px;
+    }
+
+    @media (max-width: 600px) {
+      .theme-select-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .pdf-page {
+        box-shadow: none;
+        padding: 20mm;
+      }
+
+      .answer {
+        border-left: 3px solid #000;
+      }
+
+      .theme-select-container {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="pdf-page">
 
+    <div class="theme-select-container">
+      <label for="themeSelect">Select Theme:</label>
+      <select id="themeSelect" class="form-select form-select-sm" onchange="changeTheme(this.value)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="sepia">Sepia</option>
+        <option value="solarized">Solarized</option>
+        <option value="highcontrast">High Contrast</option>
+        <option value="midnight">Midnight Blue</option>
+        <option value="forest">Forest Green</option>
+        <option value="lavender">Lavender</option>
+        <option value="rose">Rose</option>
+        <option value="warmgray">Warm Gray</option>
+      </select>
+    </div>
 
-    <div class="container">
-    
-   
-        <h2>Financial Accounting II - Very Imp Theory</h2>
+     <h2>Financial Accounting II - Very Imp Theory</h2>
          <p style="color:red; text-align: center;"><b>Note: These are questions which you must learn, actual no. of questions are more</b></p>
            
             <h1 class="question">1. What is Consignment and Parties to consignment</h1>
@@ -221,5 +294,25 @@
        
         
 </div>            
+
+  <script>
+    function changeTheme(value) {
+      document.body.className = "";
+      const themeMap = {
+        dark: "dark-mode",
+        sepia: "sepia-mode",
+        solarized: "solarized-mode",
+        highcontrast: "highcontrast-mode",
+        midnight: "midnight-mode",
+        forest: "forest-mode",
+        lavender: "lavender-mode",
+        rose: "rose-mode",
+        warmgray: "warmgray-mode"
+      };
+      if (themeMap[value]) {
+        document.body.classList.add(themeMap[value]);
+      }
+    }
+  </script>
 </body>
 </html>
