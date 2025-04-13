@@ -44,20 +44,12 @@
     }
 ],
 "assignments": [ 
-
   {
-    "Name": "3",
-    "title": "Environmental Science",
-    "img": "https://i.ibb.co/HfS1P7RF/image.png",
-    "href": "3",
-    "visible": "false"
-  },
-  {
-    "Name": "4",
-    "title": "Social Media Marketing",
-    "img": "https://i.ibb.co/g507cBq/image.png",
-    "href": "4",
-    "visible": "false"
+    "Name": "2",
+    "title": "FA II - Vimp Theory",
+    "img": "https://i.ibb.co/ZpcnH0Z9/image.png",
+    "href": "2",
+    "visible": "true"
   },
 {
     "Name": "2",
@@ -79,6 +71,13 @@
     "img": "https://i.ibb.co/zVG3NyYh/image.png",
     "href": "1",
     "visible": "true"
+  },
+    {
+    "Name": "3",
+    "title": "Environmental Science",
+    "img": "https://i.ibb.co/HfS1P7RF/image.png",
+    "href": "3",
+    "visible": "false"
   }
 ],
 "notes": [
