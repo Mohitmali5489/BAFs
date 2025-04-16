@@ -18,7 +18,7 @@
     },
     {
         "Name": "Con_fesses",
-        "data": "Imps added in confession, first prepare Vimp then also go for imp"   
+        "data": "false"   
     },
     {
         "Name": "Con_img",
@@ -50,7 +50,7 @@
     "title": "Auditing Question Bank",
    "img": "https://i.ibb.co/ns7f7wmz/image.png",
     "href": "5",
-    "visible": "true"
+    "visible": "false"
   },
      {
     "Name": "1",
