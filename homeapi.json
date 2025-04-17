@@ -18,7 +18,7 @@
     },
     {
         "Name": "Con_fesses",
-        "data": "Vimp-1,3,5,6,7,8 Do these then go for others also"   
+        "data": "false"   
     },
     {
         "Name": "Con_img",
@@ -57,7 +57,7 @@
     "title": "Introduction to Business",
     "img": "https://i.ibb.co/zVG3NyYh/image.png",
     "href": "1",
-    "visible": "true"
+    "visible": "false"
   },
     {
     "Name": "3",
