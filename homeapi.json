@@ -28,7 +28,7 @@
 "visibility":[
     {
         "Name": "Event Bar",
-        "visible": "false"
+        "visible": "true"
     },
     {
         "Name": "Question Bank with Answers",
