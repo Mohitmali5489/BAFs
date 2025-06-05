@@ -141,26 +141,24 @@
   const input = document.getElementById('usernameInput');
   const resultDiv = document.getElementById('result');
 
-  // Public CORS proxy to avoid cross-origin issues
-  const CORS_PROXY = 'https://api.allorigins.win/get?url=';
+  // Updated CORS proxy with corsproxy.io
+  const CORS_PROXY = 'https://corsproxy.io/?';
 
   function sanitizeUsername(username) {
     return username.trim().toLowerCase();
   }
 
   async function fetchInstagramDP(username) {
-    const url = `https://www.instagram.com/${username}/`;
+    const url = \`https://www.instagram.com/\${username}/\`;
     try {
       const response = await fetch(CORS_PROXY + encodeURIComponent(url));
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const data = await response.json();
-      // data.contents has the HTML of the Instagram user page
-      const htmlString = data.contents;
+      const htmlString = await response.text();
 
-      // Parse the HTML string to find the profile pic URL from sharedData
-      const sharedDataRegex = /<script type="text\/javascript">window\._sharedData = (.+);<\/script>/;
+      // Parse the HTML string to find the profile pic URL from window._sharedData JSON
+      const sharedDataRegex = /<script type="text\\/javascript">window\\._sharedData = (.+);<\\/script>/;
       const match = htmlString.match(sharedDataRegex);
       if (!match) {
         throw new Error('Could not find user data');
@@ -178,11 +176,11 @@
   }
 
   function showResult(imageUrl) {
-    resultDiv.innerHTML = `<img src="${imageUrl}" alt="Instagram DP" />`;
+    resultDiv.innerHTML = \`<img src="\${imageUrl}" alt="Instagram DP" />\`;
   }
 
   function showError(message) {
-    resultDiv.innerHTML = `<div class="error">${message}</div>`;
+    resultDiv.innerHTML = \`<div class="error">\${message}</div>\`;
   }
 
   fetchBtn.addEventListener('click', async () => {
@@ -199,14 +197,13 @@
       const dpUrl = await fetchInstagramDP(username);
       showResult(dpUrl);
     } catch (error) {
-      showError('Failed to fetch Instagram DP. User may not exist or private profile.');
+      showError('Failed to fetch Instagram DP. User may not exist or profile is private.');
     } finally {
       fetchBtn.disabled = false;
       fetchBtn.textContent = 'Get DP';
     }
   });
 
-  // Optional: Trigger fetch on Enter press
   input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       fetchBtn.click();
