@@ -1,126 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tick Icon Demo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: white;
-      padding: 20px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Instagram DP Fetcher</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-    .user {
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
+  :root {
+    --primary-color: #833ab4;
+    --secondary-color: #fd1d1d;
+    --accent-color: #fcb045;
+    --bg-gradient: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    --text-color: #333;
+  }
 
-    .tick-icon {
-      vertical-align: middle;
-      cursor: pointer;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    /* Tooltip for desktop */
-    .tick-icon[title] {
-      position: relative;
-    }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
-    /* Modal styles for mobile */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
+  .container {
+    background: white;
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  h1 {
+    background: var(--bg-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 40px;
+    border: 1.5px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color);
+  }
+
+  button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 40px;
+    background: var(--bg-gradient);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.4s ease;
+  }
+
+  button:hover {
+    background: var(--secondary-color);
+  }
+
+  .result {
+    margin-top: 2rem;
+    min-height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .result img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .result img:hover {
+    transform: scale(1.1);
+  }
+
+  .error {
+    color: #e63946;
+    font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 1.5rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+    button {
       width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0,0,0,0.5);
+      padding: 0.75rem 0;
     }
-
-    .modal-content {
-      background: #1e1e1e;
-      color: white;
-      margin: 30% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .close-btn {
-      float: right;
-      font-size: 24px;
-      cursor: pointer;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-
-  <div class="user">
-    John Doe 
-    <img src="https://i.ibb.co/kgJpMCHr/blue.png" width="16" 
-         class="tick-icon" 
-         title="Verified User"
-         data-title="Verified User" 
-         data-description="This user is verified as a genuine account.">
+  <div class="container">
+    <h1>Instagram DP Fetcher</h1>
+    <p>Enter Instagram username to get profile picture</p>
+    <input id="usernameInput" type="text" placeholder="Instagram username" autocomplete="off" />
+    <button id="fetchBtn">Get DP</button>
+    <div class="result" id="result"></div>
   </div>
 
-  <div class="user">
-    Jane Smith 
-    <img src="https://i.ibb.co/gLJLF9Z2/silver.png" width="16" 
-         class="tick-icon" 
-         title="Special User"
-         data-title="Special User" 
-         data-description="This user has special privileges or recognition.">
-  </div>
+<script>
+  const fetchBtn = document.getElementById('fetchBtn');
+  const input = document.getElementById('usernameInput');
+  const resultDiv = document.getElementById('result');
 
-  <div class="user">
-    Admin 
-    <img src="https://i.ibb.co/Q2C7MrM/gold.png" width="16" 
-         class="tick-icon" 
-         title="Admin User"
-         data-title="Admin User" 
-         data-description="This account is an admin-level user.">
-  </div>
+  // Public CORS proxy to avoid cross-origin issues
+  const CORS_PROXY = 'https://api.allorigins.win/get?url=';
 
-  <!-- Modal for Mobile -->
-  <div id="tickModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h3 id="tickTitle"></h3>
-      <p id="tickDescription"></p>
-    </div>
-  </div>
+  function sanitizeUsername(username) {
+    return username.trim().toLowerCase();
+  }
 
-  <script>
-    function isMobile() {
-      return window.innerWidth <= 768;
+  async function fetchInstagramDP(username) {
+    const url = `https://www.instagram.com/${username}/`;
+    try {
+      const response = await fetch(CORS_PROXY + encodeURIComponent(url));
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      // data.contents has the HTML of the Instagram user page
+      const htmlString = data.contents;
+
+      // Parse the HTML string to find the profile pic URL from sharedData
+      const sharedDataRegex = /<script type="text\/javascript">window\._sharedData = (.+);<\/script>/;
+      const match = htmlString.match(sharedDataRegex);
+      if (!match) {
+        throw new Error('Could not find user data');
+      }
+      const jsonData = JSON.parse(match[1]);
+      const user = jsonData.entry_data.ProfilePage[0].graphql.user;
+      const profilePicUrl = user.profile_pic_url_hd || user.profile_pic_url;
+      if (!profilePicUrl) {
+        throw new Error('Profile picture not found');
+      }
+      return profilePicUrl;
+    } catch (error) {
+      throw error;
     }
+  }
 
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('tick-icon') && isMobile()) {
-        const title = e.target.getAttribute('data-title');
-        const description = e.target.getAttribute('data-description');
+  function showResult(imageUrl) {
+    resultDiv.innerHTML = `<img src="${imageUrl}" alt="Instagram DP" />`;
+  }
 
-        document.getElementById('tickTitle').textContent = title;
-        document.getElementById('tickDescription').textContent = description;
-        document.getElementById('tickModal').style.display = 'block';
-      }
-    });
+  function showError(message) {
+    resultDiv.innerHTML = `<div class="error">${message}</div>`;
+  }
 
-    document.querySelector('.close-btn').onclick = function () {
-      document.getElementById('tickModal').style.display = 'none';
-    };
+  fetchBtn.addEventListener('click', async () => {
+    const username = sanitizeUsername(input.value);
+    resultDiv.innerHTML = '';
+    if (!username) {
+      showError('Please enter a valid Instagram username.');
+      return;
+    }
+    fetchBtn.disabled = true;
+    fetchBtn.textContent = 'Loading...';
 
-    window.onclick = function (event) {
-      if (event.target === document.getElementById('tickModal')) {
-        document.getElementById('tickModal').style.display = 'none';
-      }
-    };
-  </script>
+    try {
+      const dpUrl = await fetchInstagramDP(username);
+      showResult(dpUrl);
+    } catch (error) {
+      showError('Failed to fetch Instagram DP. User may not exist or private profile.');
+    } finally {
+      fetchBtn.disabled = false;
+      fetchBtn.textContent = 'Get DP';
+    }
+  });
+
+  // Optional: Trigger fetch on Enter press
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      fetchBtn.click();
+    }
+  });
+</script>
 </body>
 </html>
+
