@@ -1,215 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Instagram DP Fetcher</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>BAFs App</title>
+  <link rel="icon" type="image/png" href="https://fuovcuzaxfkyqrridrgy.supabase.co/storage/v1/object/public/profile-pics//study-icon-modified.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  :root {
-    --primary-color: #833ab4;
-    --secondary-color: #fd1d1d;
-    --accent-color: #fcb045;
-    --bg-gradient: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-    --text-color: #333;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .container {
-    background: white;
-    max-width: 400px;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-
-  h1 {
-    background: var(--bg-gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-  }
-
-  p {
-    color: #666;
-    margin-bottom: 2rem;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border-radius: 40px;
-    border: 1.5px solid #ccc;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-
-  input[type="text"]:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 8px var(--primary-color);
-  }
-
-  button {
-    margin-top: 1.5rem;
-    padding: 0.75rem 2rem;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 40px;
-    background: var(--bg-gradient);
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.4s ease;
-  }
-
-  button:hover {
-    background: var(--secondary-color);
-  }
-
-  .result {
-    margin-top: 2rem;
-    min-height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .result img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid var(--primary-color);
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  .result img:hover {
-    transform: scale(1.1);
-  }
-
-  .error {
-    color: #e63946;
-    font-weight: 600;
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 1.5rem;
+  <style>
+    :root {
+      --gradient: linear-gradient(135deg, #b84fff, #7a2cff);
+      --bg: #f2f2f2;
+      --text: #111;
+      --card: #fff;
+      --highlight: #b84fff;
+      --profile-border: black;
     }
-    h1 {
-      font-size: 1.5rem;
+    [data-theme="dark"] {
+      --gradient: linear-gradient(135deg, #2a2a3d, #1e1e2e);
+      --bg: #12121a;
+      --text: #f1f1f1;
+      --card: #1e1e2e;
+      --profile-border: #fff;
     }
-    button {
-      width: 100%;
-      padding: 0.75rem 0;
+
+    * {box-sizing: border-box; transition: all 0.3s;}
+    body {
+      margin:0; font-family:"Inter",sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
-  }
-</style>
+
+    /* Top Nav */
+    .top-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 18px;
+      background:var(--gradient);
+      color:#fff;
+      position:sticky;top:0;z-index:50;
+    }
+    .top-bar h1 {font-size:18px;margin:0;font-weight:600;}
+    .menu-toggle {font-size:24px;cursor:pointer;}
+    .profile-img {
+      width:36px;height:36px;border-radius:50%;
+      border:2px solid #fff;cursor:pointer;object-fit:cover;
+    }
+
+    /* Sidebar */
+    .sidebar-overlay {
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      opacity:0;visibility:hidden;transition:0.3s;
+      z-index:40;
+    }
+    .sidebar-overlay.active {opacity:1;visibility:visible;}
+    .sidebar {
+      position:fixed;top:0;left:-260px;
+      width:260px;height:100%;
+      background:var(--card);
+      padding:20px;
+      transition:0.3s;
+      z-index:41;
+      display:flex;flex-direction:column;
+    }
+    .sidebar.active {left:0;}
+    .sidebar nav a {
+      display:block;padding:12px 0;
+      color:var(--text);text-decoration:none;
+      font-weight:500;
+    }
+    .sidebar nav a:hover {color:var(--highlight);}
+    .sidebar button {
+      margin-top:auto;margin-bottom:10px;
+      padding:12px;border:none;border-radius:10px;
+      font-weight:600;cursor:pointer;
+    }
+    .theme-toggle {background:var(--highlight);color:#fff;}
+    .logout {background:#e63946;color:#fff;}
+
+    /* Main Container */
+    .container {padding:16px;max-width:600px;margin:auto;}
+    h3 {margin:20px 0 12px;text-align:center;}
+
+    /* Cards */
+    .card {
+      background:var(--card);
+      border-radius:14px;
+      padding:14px;
+      margin:12px auto;
+      display:flex;align-items:center;
+      box-shadow:0 3px 12px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width:44px;height:44px;border-radius:50%;
+      margin-right:14px;object-fit:cover;
+    }
+    .card-title {font-weight:600;font-size:16px;display:flex;align-items:center;}
+    .card-sub {font-size:13px;color:gray;}
+
+    /* Floating Confession Input */
+    .fab {
+      position:fixed;bottom:70px;right:20px;
+      background:var(--highlight);color:#fff;
+      width:56px;height:56px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Confession Input Modal */
+    .modal {
+      position:fixed;bottom:-100%;left:0;width:100%;
+      background:var(--card);border-radius:20px 20px 0 0;
+      box-shadow:0 -3px 10px rgba(0,0,0,0.3);
+      padding:20px;transition:0.3s;z-index:60;
+    }
+    .modal.active {bottom:0;}
+    .modal input {
+      width:100%;padding:12px;border:none;
+      border-radius:8px;background:var(--bg);
+      margin-bottom:12px;font-size:14px;
+      color:var(--text);
+    }
+    .modal button {
+      width:100%;padding:12px;border:none;
+      border-radius:10px;background:var(--highlight);
+      color:#fff;font-weight:600;font-size:15px;
+      cursor:pointer;
+    }
+
+    /* Toasts */
+    #toast-container {position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:100;}
+    .toast {
+      background:var(--card);color:var(--text);
+      padding:10px 16px;margin-top:8px;
+      border-radius:8px;font-size:14px;
+      box-shadow:0 3px 10px rgba(0,0,0,0.2);
+      animation:fadein 0.3s, fadeout 0.3s 2.7s forwards;
+    }
+    @keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeout{to{opacity:0;transform:translateY(10px);}}
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Instagram DP Fetcher</h1>
-    <p>Enter Instagram username to get profile picture</p>
-    <input id="usernameInput" type="text" placeholder="Instagram username" autocomplete="off" />
-    <button id="fetchBtn">Get DP</button>
-    <div class="result" id="result"></div>
+  <!-- Overlay + Sidebar -->
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <nav>
+      <a href="#">🏠 Home</a>
+      <a href="about-us.html">ℹ️ About Us</a>
+      <a href="contact-us.html">❓ Contact Us</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
+    <button class="logout" onclick="logout()">Logout</button>
   </div>
 
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+    <h1>BAFs App</h1>
+    <img id="profilePic" class="profile-img" src="" onclick="openProfile()"/>
+  </div>
+
+  <!-- Main -->
+  <div class="container">
+    <h3>Channels</h3>
+
+    <!-- Example Card -->
+    <a href="https://mohitmali5489.github.io/Chats/Attendance_Report.html" class="card theme-link">
+      <img src="https://i.ibb.co/B5nqq226/Untitled-design-1.png" alt="icon"/>
+      <div>
+        <div class="card-title">Attendance Report <img src="https://i.ibb.co/SXGL4Nq0/green.png" width="16"></div>
+        <div class="card-sub">Where Every Day Counts.</div>
+      </div>
+    </a>
+    <!-- Repeat for all other channels -->
+  </div>
+
+  <!-- Floating Button -->
+  <div class="fab" onclick="openModal()">＋</div>
+
+  <!-- Input Modal -->
+  <div class="modal" id="confessionModal">
+    <input type="text" id="messageInput" placeholder="🌟 What's on your mind?">
+    <button onclick="addConfession()">Post Confession</button>
+  </div>
+
+  <!-- Toasts -->
+  <div id="toast-container"></div>
+
 <script>
-  const fetchBtn = document.getElementById('fetchBtn');
-  const input = document.getElementById('usernameInput');
-  const resultDiv = document.getElementById('result');
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+}
+function openModal(){document.getElementById("confessionModal").classList.add("active");}
+function closeModal(){document.getElementById("confessionModal").classList.remove("active");}
 
-  // Updated CORS proxy with corsproxy.io
-  const CORS_PROXY = 'https://corsproxy.io/?';
+function toggleTheme(){
+  const root=document.documentElement;
+  const newTheme=root.getAttribute("data-theme")==="light"?"dark":"light";
+  root.setAttribute("data-theme",newTheme);
+  localStorage.setItem("theme",newTheme);
+}
 
-  function sanitizeUsername(username) {
-    return username.trim().toLowerCase();
-  }
+function showToast(msg){
+  const c=document.getElementById("toast-container");
+  const t=document.createElement("div");
+  t.className="toast";t.innerText=msg;c.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
 
-  async function fetchInstagramDP(username) {
-    const url = \`https://www.instagram.com/\${username}/\`;
-    try {
-      const response = await fetch(CORS_PROXY + encodeURIComponent(url));
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const htmlString = await response.text();
-
-      // Parse the HTML string to find the profile pic URL from window._sharedData JSON
-      const sharedDataRegex = /<script type="text\\/javascript">window\\._sharedData = (.+);<\\/script>/;
-      const match = htmlString.match(sharedDataRegex);
-      if (!match) {
-        throw new Error('Could not find user data');
-      }
-      const jsonData = JSON.parse(match[1]);
-      const user = jsonData.entry_data.ProfilePage[0].graphql.user;
-      const profilePicUrl = user.profile_pic_url_hd || user.profile_pic_url;
-      if (!profilePicUrl) {
-        throw new Error('Profile picture not found');
-      }
-      return profilePicUrl;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  function showResult(imageUrl) {
-    resultDiv.innerHTML = \`<img src="\${imageUrl}" alt="Instagram DP" />\`;
-  }
-
-  function showError(message) {
-    resultDiv.innerHTML = \`<div class="error">\${message}</div>\`;
-  }
-
-  fetchBtn.addEventListener('click', async () => {
-    const username = sanitizeUsername(input.value);
-    resultDiv.innerHTML = '';
-    if (!username) {
-      showError('Please enter a valid Instagram username.');
-      return;
-    }
-    fetchBtn.disabled = true;
-    fetchBtn.textContent = 'Loading...';
-
-    try {
-      const dpUrl = await fetchInstagramDP(username);
-      showResult(dpUrl);
-    } catch (error) {
-      showError('Failed to fetch Instagram DP. User may not exist or profile is private.');
-    } finally {
-      fetchBtn.disabled = false;
-      fetchBtn.textContent = 'Get DP';
-    }
-  });
-
-  input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      fetchBtn.click();
-    }
-  });
+// Demo functions
+function logout(){showToast("Logged Out");}
+function openProfile(){showToast("Open Profile");}
+function addConfession(){
+  const v=document.getElementById("messageInput").value.trim();
+  if(!v){showToast("Please write something!");return;}
+  showToast("Confessed: "+v);
+  closeModal();
+  document.getElementById("messageInput").value="";
+}
 </script>
 </body>
 </html>
-
