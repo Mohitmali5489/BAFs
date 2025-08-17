@@ -1,227 +1,832 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <title>BAFs App</title>
   <link rel="icon" type="image/png" href="https://fuovcuzaxfkyqrridrgy.supabase.co/storage/v1/object/public/profile-pics//study-icon-modified.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  
+  <script>
+    // This script runs early to prevent a "flash of the wrong theme."
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 
   <style>
+    /* 🎨 --- Color & Theme Variables --- 🎨 */
     :root {
-      --gradient: linear-gradient(135deg, #b84fff, #7a2cff);
-      --bg: #f2f2f2;
-      --text: #111;
-      --card: #fff;
-      --highlight: #b84fff;
-      --profile-border: black;
+      --primary-accent: #b84fff;
+      --primary-gradient: linear-gradient(90deg, #b84fff, #8f00ff);
+      --danger-color: #e53935;
+      --success-color: #43a047;
+      --font-family: 'Inter', sans-serif;
+      
+      /* Light Theme */
+      --bg-gradient-light: linear-gradient(180deg, #f5f5f7, #e9e9ed);
+      --card-bg-light: rgba(255, 255, 255, 0.9);
+      --text-primary-light: #121212;
+      --text-secondary-light: #5f5f5f;
+      --border-color-light: #e0e0e0;
+      --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+      --header-bg-light: rgba(255, 255, 255, 0.7);
+
+      /* Dark Theme */
+      --bg-gradient-dark: linear-gradient(180deg, #2a2a3d, #1e1e2e);
+      --card-bg-dark: rgba(42, 42, 61, 0.9);
+      --text-primary-dark: #f0f0f0;
+      --text-secondary-dark: #a0a0b0;
+      --border-color-dark: #4a4a6a;
+      --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.2);
+      --header-bg-dark: rgba(30, 30, 46, 0.7);
     }
+    
+    [data-theme="light"] {
+      --bg-gradient: var(--bg-gradient-light);
+      --card-bg: var(--card-bg-light);
+      --text-primary: var(--text-primary-light);
+      --text-secondary: var(--text-secondary-light);
+      --border-color: var(--border-color-light);
+      --shadow: var(--shadow-light);
+      --header-bg: var(--header-bg-light);
+    }
+
     [data-theme="dark"] {
-      --gradient: linear-gradient(135deg, #2a2a3d, #1e1e2e);
-      --bg: #12121a;
-      --text: #f1f1f1;
-      --card: #1e1e2e;
-      --profile-border: #fff;
+      --bg-gradient: var(--bg-gradient-dark);
+      --card-bg: var(--card-bg-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-secondary: var(--text-secondary-dark);
+      --border-color: var(--border-color-dark);
+      --shadow: var(--shadow-dark);
+      --header-bg: var(--header-bg-dark);
     }
 
-    * {box-sizing: border-box; transition: all 0.3s;}
+    /* 🧱 --- Base & Reset Styles --- 🧱 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent; /* Better mobile touch feedback */
+    }
+
+    html, body {
+      height: 100%;
+    }
+
     body {
-      margin:0; font-family:"Inter",sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font-family);
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
     }
 
-    /* Top Nav */
+    /* 🔝 --- Glassmorphism Header --- 🔝 */
     .top-bar {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 18px;
-      background:var(--gradient);
-      color:#fff;
-      position:sticky;top:0;z-index:50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.4s ease, border-color 0.4s ease;
     }
-    .top-bar h1 {font-size:18px;margin:0;font-weight:600;}
-    .menu-toggle {font-size:24px;cursor:pointer;}
+    
+    .top-bar h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .menu-toggle, .profile-link {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+    }
+    
     .profile-img {
-      width:36px;height:36px;border-radius:50%;
-      border:2px solid #fff;cursor:pointer;object-fit:cover;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-accent);
+      object-fit: cover;
+    }
+    
+    .menu-icon {
+      color: var(--text-primary);
+      font-size: 24px;
     }
 
-    /* Sidebar */
+    /* 📱 --- Mobile App-style Sidebar --- 📱 */
     .sidebar-overlay {
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
-      opacity:0;visibility:hidden;transition:0.3s;
-      z-index:40;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 199;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .sidebar-overlay.active {opacity:1;visibility:visible;}
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
     .sidebar {
-      position:fixed;top:0;left:-260px;
-      width:260px;height:100%;
-      background:var(--card);
-      padding:20px;
-      transition:0.3s;
-      z-index:41;
-      display:flex;flex-direction:column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
     }
-    .sidebar.active {left:0;}
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+    
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .sidebar-profile-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-accent);
+      margin-bottom: 10px;
+    }
+
+    #sidebar-username {
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--text-primary);
+    }
+
+    .sidebar nav {
+      flex-grow: 1;
+      padding: 15px 0;
+    }
+
     .sidebar nav a {
-      display:block;padding:12px 0;
-      color:var(--text);text-decoration:none;
-      font-weight:500;
-    }
-    .sidebar nav a:hover {color:var(--highlight);}
-    .sidebar button {
-      margin-top:auto;margin-bottom:10px;
-      padding:12px;border:none;border-radius:10px;
-      font-weight:600;cursor:pointer;
-    }
-    .theme-toggle {background:var(--highlight);color:#fff;}
-    .logout {background:#e63946;color:#fff;}
-
-    /* Main Container */
-    .container {padding:16px;max-width:600px;margin:auto;}
-    h3 {margin:20px 0 12px;text-align:center;}
-
-    /* Cards */
-    .card {
-      background:var(--card);
-      border-radius:14px;
-      padding:14px;
-      margin:12px auto;
-      display:flex;align-items:center;
-      box-shadow:0 3px 12px rgba(0,0,0,0.15);
-    }
-    .card img {
-      width:44px;height:44px;border-radius:50%;
-      margin-right:14px;object-fit:cover;
-    }
-    .card-title {font-weight:600;font-size:16px;display:flex;align-items:center;}
-    .card-sub {font-size:13px;color:gray;}
-
-    /* Floating Confession Input */
-    .fab {
-      position:fixed;bottom:70px;right:20px;
-      background:var(--highlight);color:#fff;
-      width:56px;height:56px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:26px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 15px 20px;
+      font-weight: 500;
+      font-size: 16px;
+      transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Confession Input Modal */
-    .modal {
-      position:fixed;bottom:-100%;left:0;width:100%;
-      background:var(--card);border-radius:20px 20px 0 0;
-      box-shadow:0 -3px 10px rgba(0,0,0,0.3);
-      padding:20px;transition:0.3s;z-index:60;
-    }
-    .modal.active {bottom:0;}
-    .modal input {
-      width:100%;padding:12px;border:none;
-      border-radius:8px;background:var(--bg);
-      margin-bottom:12px;font-size:14px;
-      color:var(--text);
-    }
-    .modal button {
-      width:100%;padding:12px;border:none;
-      border-radius:10px;background:var(--highlight);
-      color:#fff;font-weight:600;font-size:15px;
-      cursor:pointer;
+    .sidebar nav a:hover {
+      background-color: rgba(184, 79, 255, 0.1);
+      color: var(--primary-accent);
     }
 
-    /* Toasts */
-    #toast-container {position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:100;}
+    .sidebar-footer {
+        padding: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .logout-button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: var(--danger-color);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .logout-button:hover {
+        background: #c62828;
+    }
+    
+    /* 🎨 --- Theme Toggle Switch --- 🎨 */
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+    }
+    .theme-switch-label {
+      font-weight: 500;
+    }
+    .theme-switch {
+      display: inline-block;
+      height: 24px;
+      position: relative;
+      width: 50px;
+    }
+    .theme-switch input {
+      display:none;
+    }
+    .slider {
+      background-color: #ccc;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      background-color: #fff;
+      bottom: 4px;
+      content: "";
+      height: 16px;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: 16px;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background: var(--primary-gradient);
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    /* 📝 --- Main Content & Input Area --- 📝 */
+    .container {
+      padding: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+      margin: 20px 0;
+      color: var(--text-secondary);
+    }
+    
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .name-button {
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    
+    .name-button.selected-name-button {
+      background: var(--primary-gradient);
+      color: white;
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+
+    .input-bar {
+      display: flex;
+      align-items: center;
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 8px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-bar input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 16px;
+      outline: none;
+      padding: 8px;
+    }
+
+    .input-bar button {
+      background: var(--primary-gradient);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    
+    .input-bar button:active {
+        transform: scale(0.9);
+    }
+    
+    .remove_div {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .remove-my-confession {
+      background-color: var(--danger-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* 💌 --- Confession & Channel Cards --- 💌 */
+    .confession-card, .channel-card {
+        background: var(--card-bg);
+        margin: 16px auto;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .confession-card:hover, .channel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .card-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-accent);
+      object-fit: cover;
+    }
+    
+    .card-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .confession-message {
+      font-style: italic;
+      font-size: 15px;
+      margin: 0;
+      line-height: 1.6;
+      word-wrap: break-word;
+    }
+
+    .channel-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        max-width: 95%;
+    }
+    
+    .channel-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .channel-info {
+        flex: 1;
+    }
+    
+    .channel-title {
+        font-weight: 600;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .channel-description {
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+    
+    .encrypted {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin: 30px 0;
+    }
+
+    /* 🍞 --- Toast Notifications --- 🍞 */
+    #toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+    }
+
     .toast {
-      background:var(--card);color:var(--text);
-      padding:10px 16px;margin-top:8px;
-      border-radius:8px;font-size:14px;
-      box-shadow:0 3px 10px rgba(0,0,0,0.2);
-      animation:fadein 0.3s, fadeout 0.3s 2.7s forwards;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-left: 5px solid var(--primary-accent);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-weight: 500;
+      font-size: 14px;
+      animation: slideInUp 0.4s ease, fadeOut 0.4s ease 2.6s;
     }
-    @keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-    @keyframes fadeout{to{opacity:0;transform:translateY(10px);}}
+
+    @keyframes slideInUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
   </style>
 </head>
 <body>
-  <!-- Overlay + Sidebar -->
-  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
-  <div class="sidebar" id="sidebar">
+
+  <div id="toast-container"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="" id="sidebarProfilePic" class="sidebar-profile-img" />
+      <div id="sidebar-username">Loading...</div>
+    </div>
     <nav>
-      <a href="#">🏠 Home</a>
+      <a href="#" onclick="location.reload()">🏠 Home</a>
       <a href="about-us.html">ℹ️ About Us</a>
       <a href="contact-us.html">❓ Contact Us</a>
     </nav>
-    <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
-    <button class="logout" onclick="logout()">Logout</button>
-  </div>
+    <div class="theme-switch-wrapper">
+        <span class="theme-switch-label">Switch Theme</span>
+        <label class="theme-switch" for="theme-checkbox">
+            <input type="checkbox" id="theme-checkbox" onchange="toggleTheme()" />
+            <div class="slider"></div>
+        </label>
+    </div>
+    <div class="sidebar-footer">
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+  </aside>
 
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+  <header class="top-bar">
+    <button class="menu-toggle" onclick="toggleSidebar()">
+      <span class="menu-icon">☰</span>
+    </button>
     <h1>BAFs App</h1>
-    <img id="profilePic" class="profile-img" src="" onclick="openProfile()"/>
-  </div>
-
-  <!-- Main -->
-  <div class="container">
-    <h3>Channels</h3>
-
-    <!-- Example Card -->
-    <a href="https://mohitmali5489.github.io/Chats/Attendance_Report.html" class="card theme-link">
-      <img src="https://i.ibb.co/B5nqq226/Untitled-design-1.png" alt="icon"/>
-      <div>
-        <div class="card-title">Attendance Report <img src="https://i.ibb.co/SXGL4Nq0/green.png" width="16"></div>
-        <div class="card-sub">Where Every Day Counts.</div>
-      </div>
+    <a href="#" class="profile-link" onclick="openProfile()">
+      <img src="" id="profilePic" class="profile-img" alt="Profile"/>
     </a>
-    <!-- Repeat for all other channels -->
-  </div>
+  </header>
 
-  <!-- Floating Button -->
-  <div class="fab" onclick="openModal()">＋</div>
+  <main class="container">
+    <div class="button-group">
+      <button class="name-button selected-name-button" onclick="selectName(this)">Anonymous</button>
+      <button class="name-button" id="nameButton" onclick="selectName(this)">Loading...</button>
+    </div>
 
-  <!-- Input Modal -->
-  <div class="modal" id="confessionModal">
-    <input type="text" id="messageInput" placeholder="🌟 What's on your mind?">
-    <button onclick="addConfession()">Post Confession</button>
-  </div>
+    <div class="input-bar">
+      <input type="text" id="messageInput" placeholder="🌟 What's on your mind?"/>
+      <button onclick="addConfession()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </div>
 
-  <!-- Toasts -->
-  <div id="toast-container"></div>
+    <div class="remove_div" id="removeDiv" style="display:none;">
+      <button class="remove-my-confession" onclick="removeMyConfession()">Remove my confession</button>
+    </div>
 
+    <h3 class="section-title">College Confessions</h3>
+    <div id="confession-list"></div>
+
+    <h3 class="section-title">Channels</h3>
+    <div id="channel-list">
+        </div>
+
+    <div class="encrypted">All Confessions are End to End Encrypted 🔒</div>
+  </main>
+  
 <script>
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("active");
-  document.getElementById("overlay").classList.toggle("active");
-}
-function openModal(){document.getElementById("confessionModal").classList.add("active");}
-function closeModal(){document.getElementById("confessionModal").classList.remove("active");}
+    const SUPABASE_URL = 'https://fuovcuzaxfkyqrridrgy.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1b3ZjdXpheGZreXFycmlkcmd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NzIyMjAsImV4cCI6MjA2MTA0ODIyMH0._PkkfWXcn4j6cjBh-yLJjDevrmhuxKxVbcdQUSgCsSk';
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-function toggleTheme(){
-  const root=document.documentElement;
-  const newTheme=root.getAttribute("data-theme")==="light"?"dark":"light";
-  root.setAttribute("data-theme",newTheme);
-  localStorage.setItem("theme",newTheme);
-}
+    // --- Global State ---
+    let selectedName = "Anonymous";
+    window.userId = null;
+    
+    const channels = [
+        { href: "https://mohitmali5489.github.io/Chats/Attendance_Report.html", icon: "https://i.ibb.co/B5nqq226/Untitled-design-1.png", title: "Attendance Report", desc: "Where Every Day Counts." },
+        { href: "https://mohitmali5489.github.io/Chats/Field_Project.html", icon: "https://iili.io/FUQrBWB.png", title: "Field Project", desc: "Guiding You from Field to File." },
+        { href: "https://mohitmali5489.github.io/Chats/Big_Data_Analysis.html", icon: "https://i.ibb.co/XxFBDh0T/LJ-1.png", title: "Big Data Analysis", desc: "Insights Through Intelligence." },
+        { href: "https://mohitmali5489.github.io/Chats/Mutual_Fund_Distributor–I.html", icon: "https://i.ibb.co/TXb0tT2/image.png", title: "Mutual Fund Distributor – I", desc: "Guiding Your Wealth, Growing Your Future." },
+        { href: "https://mohitmali5489.github.io/Chats/Subject_Central.html", icon: "https://i.ibb.co/DDHh5W6J/collection-colored-thin-icon-learning-subject-book-graduated-hat-learning-education-concept-vector-i.jpg", title: "Subject Central", desc: "Where Every Subject Meets Clarity" },
+        { href: "https://mohitmali5489.github.io/Chats/Cost_Accounting–I.html", icon: "https://i.ibb.co/352vQrW8/Untitled-design.png", title: "Cost Accounting – I", desc: "Measuring Costs, Maximizing Efficiency." },
+        { href: "https://mohitmali5489.github.io/Chats/Financial_Accounting-III.html", icon: "https://i.ibb.co/0jGdk8kw/10075627.jpg", title: "Financial Accounting - III", desc: "Deepening Insight into Financial Truths." },
+        { href: "https://mohitmali5489.github.io/Chats/Anonymous_Surveys.html", icon: "https://img.freepik.com/free-vector/clip-board-paper-pencil-cartoon-icon-illustration-education-object-icon-concept-isolated-flat-cartoon-style_138676-2152.jpg?semt=ais_hybrid&w=740", title: "Anonymous Surveys", desc: "Real Voices. Real Feedback. 100% Anonymous" },
+        { href: "https://mohitmali5489.github.io/Chats/BAFs-Official.html", icon: "https://fuovcuzaxfkyqrridrgy.supabase.co/storage/v1/object/public/profile-pics//study-icon-modified.png", title: "BAFs Official", desc: "App Related Updates and Features" }
+    ];
 
-function showToast(msg){
-  const c=document.getElementById("toast-container");
-  const t=document.createElement("div");
-  t.className="toast";t.innerText=msg;c.appendChild(t);
-  setTimeout(()=>t.remove(),3000);
-}
+    // --- UI & Utility Functions ---
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
 
-// Demo functions
-function logout(){showToast("Logged Out");}
-function openProfile(){showToast("Open Profile");}
-function addConfession(){
-  const v=document.getElementById("messageInput").value.trim();
-  if(!v){showToast("Please write something!");return;}
-  showToast("Confessed: "+v);
-  closeModal();
-  document.getElementById("messageInput").value="";
-}
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('sidebarOverlay').classList.toggle('active');
+    }
+
+    function openProfile() {
+      window.location.href = "https://bafbkbnc.github.io/BAFs/profile.html";
+    }
+
+    function logout() {
+      document.cookie = "roll=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.href = "https://bafbkbnc.github.io/BAFs/login.html";
+    }
+
+    function toggleTheme() {
+        const root = document.documentElement;
+        const newTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        document.getElementById('theme-checkbox').checked = newTheme === 'dark';
+        updateAllThemeLinks(newTheme, window.userId);
+    }
+    
+    function applySavedTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-checkbox').checked = savedTheme === 'dark';
+        if (window.userId) {
+            updateAllThemeLinks(savedTheme, window.userId);
+        }
+    }
+    
+    function updateAllThemeLinks(theme, id) {
+        document.querySelectorAll('.channel-link').forEach(link => {
+            const url = new URL(link.href);
+            url.searchParams.set('theme', theme);
+            if (id) {
+                url.searchParams.set('id', id);
+            }
+            link.href = url.toString();
+        });
+    }
+    
+    function selectName(button) {
+      document.querySelectorAll('.name-button').forEach(btn => btn.classList.remove('selected-name-button'));
+      button.classList.add('selected-name-button');
+      selectedName = button.innerText.trim();
+    }
+    
+    function renderChannels() {
+        const channelList = document.getElementById('channel-list');
+        channelList.innerHTML = '';
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        channels.forEach(channel => {
+            const cardHTML = `
+                <a href="${channel.href}" class="channel-link">
+                    <div class="channel-card">
+                        <img src="${channel.icon}" alt="Channel Icon" class="card-pic">
+                        <div class="channel-info">
+                            <div class="channel-title">
+                                ${channel.title}
+                                <img src="https://i.ibb.co/SXGL4Nq0/green.png" alt="Tick" style="width:16px; height:16px;">
+                            </div>
+                            <div class="channel-description">${channel.desc}</div>
+                        </div>
+                    </div>
+                </a>
+            `;
+            channelList.insertAdjacentHTML('beforeend', cardHTML);
+        });
+        updateAllThemeLinks(currentTheme, window.userId);
+    }
+    
+
+    // --- Data Fetching & Rendering ---
+    async function fetchUserProfile() {
+        const roll = getCookie("roll");
+        if (!roll) return;
+
+        const { data, error } = await client
+            .from('BAF')
+            .select('ID, img, NAME')
+            .eq('ROLL', roll)
+            .single();
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return;
+        }
+
+        if (data) {
+            const profilePicUrl = data.img || 'default.jpg';
+            const userName = data.NAME || 'Student';
+            
+            document.getElementById('profilePic').src = profilePicUrl;
+            document.getElementById('sidebarProfilePic').src = profilePicUrl;
+            document.getElementById('nameButton').innerText = userName;
+            document.getElementById('sidebar-username').innerText = userName;
+
+            window.userId = data.ID;
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            updateAllThemeLinks(currentTheme, window.userId);
+        }
+    }
+
+    async function fetchConfessions() {
+        const roll = getCookie("roll");
+        const confessionList = document.getElementById('confession-list');
+        const removeDiv = document.getElementById('removeDiv');
+
+        const { data, error } = await client.from('confessions').select('*').order('created_at', { ascending: false });
+
+        if (error) {
+            confessionList.innerHTML = '<p style="text-align:center;color:gray;">Error loading confessions!</p>';
+            return;
+        }
+        
+        confessionList.innerHTML = '';
+        let userHasConfession = false;
+
+        data.forEach(conf => {
+            if (conf.roll == roll) userHasConfession = true;
+
+            const ticks = {
+                blue: { src: "https://i.ibb.co/kgJpMCHr/blue.png", title: "Verified User" },
+                silver: { src: "https://i.ibb.co/gLJLF9Z2/silver.png", title: "Special User" },
+                gold: { src: "https://i.ibb.co/Q2C7MrM/gold.png", title: "Admin User" },
+                green: { src: "https://i.ibb.co/SXGL4Nq0/green.png", title: "Official Channel" },
+                black: { src: "https://i.ibb.co/zVNSNzrK/black.png", title: "Anonymous Confess" }
+            };
+            const tick = ticks[conf.tick] ? `<img src="${ticks[conf.tick].src}" width="16" title="${ticks[conf.tick].title}">` : '';
+            
+            const formattedMessage = conf.message.replace(/\\n/g, '<br>').replace(/\n/g, "<br>");
+
+            const card = document.createElement('div');
+            card.className = 'confession-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <img src="${conf.pic}" class="card-pic" alt="User picture">
+                    <div class="card-name">
+                        <span>${conf.c_name}</span>
+                        ${tick}
+                    </div>
+                </div>
+                <p class="confession-message">"${formattedMessage}"</p>
+            `;
+            confessionList.appendChild(card);
+        });
+
+        removeDiv.style.display = userHasConfession ? 'block' : 'none';
+    }
+
+    // --- Actions ---
+    async function addConfession() {
+        const roll = getCookie("roll");
+        if (!roll) return;
+
+        const message = document.getElementById('messageInput').value.trim();
+        if (!message) {
+            showToast("Please write something!");
+            return;
+        }
+
+        const { data, error } = await client.from('BAF').select('tick, img, confesses').eq('ROLL', roll).single();
+        if (error || !data) {
+            showToast("User fetch failed.");
+            return;
+        }
+
+        let pic = data.img || '';
+        let tick = data.tick || '';
+        if (selectedName.toLowerCase() === 'anonymous') {
+            pic = 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg';
+            tick = 'black';
+        }
+
+        const { error: upsertError } = await client.from('confessions').upsert([{
+            roll: roll,
+            c_name: selectedName,
+            message: message,
+            tick: tick,
+            pic: pic
+        }], { onConflict: 'roll' });
+
+        if (upsertError) {
+            showToast("Failed to post confession.");
+        } else {
+            const count = data.confesses || 0;
+            await client.from('BAF').update({ confesses: count + 1 }).eq('ROLL', roll);
+            showToast("Confessed Successfully!");
+            document.getElementById('messageInput').value = '';
+            fetchConfessions();
+        }
+    }
+
+    async function removeMyConfession() {
+        const roll = getCookie("roll");
+        if (!roll) return;
+
+        const { error } = await client.from('confessions').delete().eq('roll', roll);
+        if (error) {
+            showToast("Delete failed.");
+        } else {
+            showToast("Confession Removed.");
+            fetchConfessions();
+        }
+    }
+    
+    async function logUserVisit() {
+        const roll = getCookie("roll");
+        if (roll) {
+            const name = document.getElementById('nameButton').innerText || 'Unknown';
+            await client.from('logs').insert([{ roll: parseInt(roll), Name: name }]);
+        }
+    }
+
+    // --- Initialization ---
+    document.addEventListener("DOMContentLoaded", async () => {
+        (function checkLogin() {
+            const roll = getCookie("roll");
+            if (!roll || isNaN(roll)) {
+                window.location.href = "https://bafbkbnc.github.io/BAFs/login.html";
+            }
+        })();
+
+        applySavedTheme();
+        renderChannels();
+        await fetchUserProfile();
+        await fetchConfessions();
+        await logUserVisit();
+        
+        setInterval(fetchConfessions, 30000); // Auto-refresh confessions
+    });
 </script>
+
 </body>
 </html>
